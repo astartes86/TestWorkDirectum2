@@ -6,6 +6,20 @@ namespace TestWorkDirectum.Stations
     {
         public Station3G() : base() { }
 
+        private List<IPhone> registeredPhones = new List<IPhone>();
+        public List<IPhone> RegisteredPhones3g
+        {
+            get
+            {
+                return registeredPhones;
+            }
+
+            set
+            {
+                registeredPhones = value;
+            }
+        }
+
         public override void RegisterPhone(IPhone phone)
         {
             //TODO! в условиях сказано
@@ -15,7 +29,7 @@ namespace TestWorkDirectum.Stations
             //Идея с оверрайд методом правильная, но надо допилить.
             if (phone is Phones.Phone3G)
             {
-                RegisteredPhones.Add(phone);
+                RegisteredPhones3g.Add(phone);
                 Console.WriteLine($"3G абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' был зарегистрирован на станции 3G.");
             }
             else

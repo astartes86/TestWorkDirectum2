@@ -10,18 +10,18 @@ namespace TestWorkDirectum.Stations
         }
         //описываем зарег телефоны
 
-        //private List<IPhone> registeredPhones = new List<IPhone>();
+        private List<IPhone> registeredPhones = new List<IPhone>();
         public List<IPhone> RegisteredPhones
         {
-            get;
-            //{
-            //    return registeredPhones;
-            //}
+            get
+            {
+                return registeredPhones;
+            }
 
-            set;
-            //{
-            //    registeredPhones = value;
-            //}
+            set
+            {
+                registeredPhones = value;
+            }
         }
 
         //функция регистрирует 
