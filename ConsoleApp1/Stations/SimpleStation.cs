@@ -10,19 +10,20 @@ namespace TestWorkDirectum.Stations
         }
         //описываем зарег телефоны
 
-        private List<IPhone> registeredPhones = new List<IPhone>();
+        //private List<IPhone> registeredPhones = new List<IPhone>();
         public List<IPhone> RegisteredPhones
         {
-            get
-            {
-                return registeredPhones;
-            }
+            get;
+            //{
+            //    return registeredPhones;
+            //}
 
-            set
-            {
-                registeredPhones = value;
-            }
-        } //TODO! Пробел между функциями.
+            set;
+            //{
+            //    registeredPhones = value;
+            //}
+        }
+
         //функция регистрирует 
         public virtual void RegisterPhone(IPhone phone)
         {
@@ -31,7 +32,10 @@ namespace TestWorkDirectum.Stations
         }
 
         //функция обрабатывает исходящие вызовы для зарегистрированных
-        public bool ProcessCall(IPhone phone, string contactNumber)
+        //на станции естетственно зарегистрированных уже много и потому среди них ищем тот кто звонит
+        //ввиду того что при тесте руками регистрируем то телефон всегда будет в списке и условие никогда не выполниться
+        //или всеж выполниться? можно как то задать?
+        public bool ProcessCall(IPhone phone, string contactNumber)     // true - зареган, false - нет зареган
         {
             if (!RegisteredPhones.Contains(phone))
             {
@@ -39,7 +43,6 @@ namespace TestWorkDirectum.Stations
                 return false;
             }
             return true; 
-
         }
     }
 }
