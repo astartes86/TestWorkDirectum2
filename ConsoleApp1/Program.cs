@@ -22,6 +22,7 @@ public static class Program
         //создали station3g.ProcessCall
         //-------------------------------------------------------------------------------------------------
         SimplePhone phone1 = new ("123412341234124", "+79828019521");
+        Phone3G phone3 = new("332412347688664", "+79828019523");
         //station1.RegisteredPhones.Add(phone1); - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался, для этого и создали функцию ConnectToBase
         //public string Imei
         //public string SimNumber
@@ -30,16 +31,8 @@ public static class Program
         //public void ConnectToBase(IStation station)
         //public void Call(string contactNumber)
         //public void Call(Abonent abonent)
-        Phone3G phone3 = new ("332412347688664", "+79828019523");
-        //public string Imei
-        //public string SimNumber
-        //public IStation BaseStation
-        //public List<Abonent> Abonents
-        //public void ConnectToBase(IStation station)
-        //public void Call(string contactNumber)
-        //public void Call(Abonent abonent)
         //-------------------------------------------------------------------------------------------------
-        phone1.ConnectToBase(station3g);
+        phone1.ConnectToBase(station3g);//при включении телефон послал запрос на регистрацию
         phone3.ConnectToBase(station3g);
         phone1.ConnectToBase(station1);
         phone3.ConnectToBase(station1);// если убрать валидацию RegisteredPhones в SimplePhone.cs то ловим исключение в SimpleStation.cs 

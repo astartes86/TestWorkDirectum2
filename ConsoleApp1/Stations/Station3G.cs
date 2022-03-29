@@ -2,9 +2,9 @@
 
 namespace TestWorkDirectum.Stations
 {
-    internal class Station3G : SimpleStation
+    internal class Station3G : SimpleStation//наследуем от класса SimpleStation, который реализует интерфейс
     {
-        public Station3G() : base() { }
+        public Station3G() : base() { }//наследуем все методы
 
         private List<IPhone> registeredPhones = new List<IPhone>();
         public List<IPhone> RegisteredPhones3g
