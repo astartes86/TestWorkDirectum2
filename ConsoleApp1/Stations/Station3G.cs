@@ -2,7 +2,7 @@
 
 namespace TestWorkDirectum.Stations
 {
-    internal class Station3G : SimpleStation//наследуем от класса SimpleStation, который реализует интерфейс
+    internal class Station3G : SimpleStation//наследуем от класса SimpleStation, который в свою очередь реализует интерфейс IStation
     {
         public Station3G() : base() { }//наследуем все методы
 
