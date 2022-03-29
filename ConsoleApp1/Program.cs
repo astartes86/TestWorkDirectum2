@@ -8,23 +8,29 @@ public static class Program
     public static void Main()
     {
         Console.WriteLine("Добро пожаловать в программу тестового задания 'Cтанции и телефоны'.");
+        Console.WriteLine("Для остановки вв");
         var stations = new List<IStation>();
         stations.Add(new SimpleStation());
         stations.Add(new Station3G());
-            //SimpleStation station1 = new ();
+        //SimpleStation station1 = new ();
         //внутри:
         //создали station1.RegisteredPhone
         //создали station1.RegisteredPhones
         //создали station1.ProcessCall
-            //Station3G station3g = new ();
+        //Station3G station3g = new ();
         //внутри:
         //создали station3g.RegisteredPhone (переопределеный: добавляет либо в список RegisteredPhones либо в список RegisteredPhones3g? реализовать второе осталось)
         //создали station3g.RegisteredPhones 
         //создали station3g.RegisteredPhones3g
         //создали station3g.ProcessCall
         //-------------------------------------------------------------------------------------------------
-        SimplePhone phone1 = new ("123412341234124", "+79828019521");
-        Phone3G phone3 = new("332412347688664", "+79828019523");
+
+        var phones = new List<IPhone>();
+        phones.Add(new SimplePhone("123412341234124", "+79828019521"));
+        phones.Add(new Phone3G("332412347688664", "+79828019523"));
+        phones.Add(new Phone3G("332412347688555", "+79828019555"));
+        //SimplePhone phone1 = new ("123412341234124", "+79828019521");
+        //Phone3G phone3 = new("332412347688664", "+79828019523");
         //station1.RegisteredPhones.Add(phone1); - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался, для этого и создали функцию ConnectToBase
         //public string Imei
         //public string SimNumber
@@ -34,12 +40,27 @@ public static class Program
         //public void Call(string contactNumber)
         //public void Call(Abonent abonent)
         //-------------------------------------------------------------------------------------------------
-        phone1.ConnectToBase(stations[0]);//при включении телефон послал запрос на регистрацию
-        phone3.ConnectToBase(stations[0]);
-        phone1.ConnectToBase(stations[1]);
-        phone3.ConnectToBase(stations[1]);// если убрать валидацию RegisteredPhones в SimplePhone.cs то ловим исключение в SimpleStation.cs 
-        //phone3.ConnectToBase(station3g);// если убрать валидацию RegisteredPhones в SimplePhone.cs то ловим исключение в Station3G.cs
-        phone1.Call("+79828019521");
+        phones[0].ConnectToBase(stations[0]);//при включении телефон послал запрос на регистрацию
+
+        Random x = new Random();//рандом для постепенного создания подключений телефонов
+        int n = x.Next(100);
+
+        Random y = new Random();
+        int number_station = y.Next(stations.Count);
+
+        if (true)
+        {
+            foreach (var phone in phones)
+            {
+                if (n == 55)
+                {
+                    phone.ConnectToBase(stations[number_station]);
+
+                }
+            }
+        }
+
+        phones[2].Call("+79828019521"); //типо звоним - если не зареган то звонок прекращаем
         //Abonent abonent1 = new Abonent("Vladimir", "+79828019521");
         //phone3.Call(abonent1);
     }

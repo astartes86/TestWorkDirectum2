@@ -9,7 +9,7 @@ namespace TestWorkDirectum.Interfaces
 {
     internal interface IStation
     {
-        protected List<IPhone> RegisteredPhones { get; }
+        public List<IPhone> RegisteredPhones { get; }
 
         public void RegisterPhone(IPhone phone);
 
