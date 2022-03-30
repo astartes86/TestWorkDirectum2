@@ -39,7 +39,7 @@ namespace TestWorkDirectum.Stations
         {
             if (!RegisteredPhones.Contains(phone))
             {
-                Console.WriteLine($"Номер '{phone.SimNumber}' НЕ зарегистрирован на станции!");
+                Console.WriteLine($"Станция: Номер '{phone.SimNumber}' НЕ зарегистрирован на станции!");
                 return false;
             }
             return true; 

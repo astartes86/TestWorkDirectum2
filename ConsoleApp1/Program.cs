@@ -46,24 +46,23 @@ public static class Program
         Random y = new Random();//рандом для случайной станции
 
 
-            for (; ; )
-            {
-                int n = x.Next(100);
-                
-
-                Console.WriteLine(n);
-
-
-                if (n == 55)
-                foreach (var phone in phones)
+        for (; ; )
+        {
+            int n = x.Next(100);
+            Console.WriteLine(n);
+                if (n == 55)                                            //наконец дождались что телефоны включились
+                foreach (var phone in phones)                           //все теелфоны коннектим к случайной станции - при повторном включении дублируются в списке на станции
                 {
                     int number_station = y.Next(stations.Count);
                     phone.ConnectToBase(stations[number_station]);
+                    phones[2].Call("+79828019521");                     //типо звоним - если не зареган то звонок прекращаем
                 }
-                if (Console.ReadKey().Key == ConsoleKey.Escape)
-                    break;
+                if (n == 55)
+                    if (Console.ReadKey().Key == ConsoleKey.Escape)
+                        break;
         }
-            phones[2].Call("+79828019521"); //типо звоним - если не зареган то звонок прекращаем
+
+        
         //Abonent abonent1 = new Abonent("Vladimir", "+79828019521");
         //phone3.Call(abonent1);
     }
