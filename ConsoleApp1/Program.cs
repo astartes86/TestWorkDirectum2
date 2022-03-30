@@ -49,21 +49,20 @@ public static class Program
             for (; ; )
             {
                 int n = x.Next(100);
-                int number_station = y.Next(stations.Count);
+                
 
                 Console.WriteLine(n);
 
+
+                if (n == 55)
                 foreach (var phone in phones)
                 {
-                    if (n == 55)
-                    {
-                        phone.ConnectToBase(stations[number_station]);
-                        if (Console.ReadKey().Key != ConsoleKey.Escape)
-                            break;
-                    }
+                    int number_station = y.Next(stations.Count);
+                    phone.ConnectToBase(stations[number_station]);
                 }
-            }
-
+                if (Console.ReadKey().Key == ConsoleKey.Escape)
+                    break;
+        }
             phones[2].Call("+79828019521"); //типо звоним - если не зареган то звонок прекращаем
         //Abonent abonent1 = new Abonent("Vladimir", "+79828019521");
         //phone3.Call(abonent1);
