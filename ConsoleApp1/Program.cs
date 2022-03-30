@@ -43,24 +43,28 @@ public static class Program
         phones[0].ConnectToBase(stations[0]);//при включении телефон послал запрос на регистрацию
 
         Random x = new Random();//рандом для постепенного создания подключений телефонов
-        int n = x.Next(100);
+        Random y = new Random();//рандом для случайной станции
 
-        Random y = new Random();
-        int number_station = y.Next(stations.Count);
 
-        if (true)
-        {
-            foreach (var phone in phones)
+            for (; ; )
             {
-                if (n == 55)
-                {
-                    phone.ConnectToBase(stations[number_station]);
+                int n = x.Next(100);
+                int number_station = y.Next(stations.Count);
 
+                Console.WriteLine(n);
+
+                foreach (var phone in phones)
+                {
+                    if (n == 55)
+                    {
+                        phone.ConnectToBase(stations[number_station]);
+                        if (Console.ReadKey().Key != ConsoleKey.Escape)
+                            break;
+                    }
                 }
             }
-        }
 
-        phones[2].Call("+79828019521"); //типо звоним - если не зареган то звонок прекращаем
+            phones[2].Call("+79828019521"); //типо звоним - если не зареган то звонок прекращаем
         //Abonent abonent1 = new Abonent("Vladimir", "+79828019521");
         //phone3.Call(abonent1);
     }
