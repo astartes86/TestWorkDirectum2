@@ -43,7 +43,7 @@ public static class Program
 //        phones[1].Call("+79828019666");
 
         Random x = new Random();//рандом для постепенного создания подключений телефонов
-        Random y = new Random();//рандом для случайной станции
+        //Random y = new Random();//рандом для случайной станции
 
         for (; ; )
         {
@@ -53,14 +53,20 @@ public static class Program
                 Console.WriteLine("заново добавляем теже");
                 foreach (var phone in phones)                           //все теелфоны коннектим к ближайшей(случайной) станции - при повторном включении дублируются в списке на станции
                 {
-                    int number_station = y.Next(stations.Count);        //получаем номер какойто случайной станции из появившихся
+                    int number_station = x.Next(stations.Count);        //получаем номер какойто случайной станции из появившихся
+
                     phone.ConnectToBase(stations[number_station]);      
-                    phones[1].Call("+79828019521");                     //типо звоним - если не зареган то звонок прекращаем
+                    phones[x.Next(phones.Count)].Call("+79828019521");                     //типо звоним - если не зареган то звонок прекращаем
                 }
             }
             if (n == 55)
                 if (Console.ReadKey().Key == ConsoleKey.Escape)         //выходим из приложения
                     break;
+        }
+        Console.WriteLine("Для разрегистрации случайного телефона на случайной станции нажмите D");
+        if (Console.ReadKey().Key == ConsoleKey.D)
+        {
+            phones[x.Next(phones.Count)].DisconnectToBase(stations[x.Next(stations.Count)]);
         }
 
         //Abonent abonent1 = new Abonent("Vladimir", "+79828019521");

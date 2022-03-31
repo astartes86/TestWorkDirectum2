@@ -41,7 +41,7 @@ namespace TestWorkDirectum.Stations
                     {
                         Console.WriteLine($"Станция: Абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' УЖЕ зарегистрирован на станции. Повторная регистрация не требуется.");
                     }
-            }
+                }
                 else
                 {
                     foreach (var ph in RegisteredPhones) //проверили имеющийся список на повторения
@@ -55,7 +55,7 @@ namespace TestWorkDirectum.Stations
                     {
                         Console.WriteLine($"Станция: Абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' УЖЕ зарегистрирован на станции. Повторная регистрация не требуется.");
                     }
-            }
+                }
         }
 
         //пришлось создать ибо 3g телефоны регаются в свой список и соответственно для 3g надо искать в обоих списках
@@ -66,7 +66,7 @@ namespace TestWorkDirectum.Stations
             {
                 Console.WriteLine($"Станция: Номер '{phone.SimNumber}' НЕ зарегистрирован на станции 3G!");
                 return false;
-            }                                              
+            }
             return true;
         }
     }

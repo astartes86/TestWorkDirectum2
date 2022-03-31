@@ -86,7 +86,7 @@ namespace TestWorkDirectum.Phones
         //функция коннектит имей к станции, то есть регистрирует
         public void ConnectToBase(IStation station)
         {
-            BaseStation = station;      //создаем станцию через интерфейс - то есть она либо 3ж либо обычная - и привязываем ее к конкретно указанной руками при вызове
+            BaseStation = station;      //создаем локальную станцию через интерфейс - то есть она либо 3ж либо обычная - и привязываем ее к конкретно указанной руками при вызове
             station.RegisterPhone(this);//эта станция вносит телефон в список зареганых на этой станции
         }
 
@@ -111,5 +111,12 @@ namespace TestWorkDirectum.Phones
         {
            Call(abonent.PhoneNumber);
         }
+
+        public void DisconnectToBase(IStation station)
+        {
+            BaseStation = station;
+            station.UnregisterPhone(this);
+        }
+
     }
 }
