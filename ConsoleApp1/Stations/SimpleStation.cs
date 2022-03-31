@@ -27,8 +27,14 @@ namespace TestWorkDirectum.Stations
         //функция регистрирует 
         public virtual void RegisterPhone(IPhone phone)
         {
-            RegisteredPhones.Add(phone);
-            Console.WriteLine($"Абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' был зарегистрирован на станции с номером.");
+            bool b = false;
+            foreach (var ph in RegisteredPhones) //проверили имеющийся список на повторения
+                if (ph == phone) b = true;
+            if (!b)
+            {
+                RegisteredPhones.Add(phone);
+                Console.WriteLine($"Абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' был зарегистрирован на станции с номером.");
+            }
         }
 
         //функция обрабатывает исходящие вызовы для зарегистрированных
