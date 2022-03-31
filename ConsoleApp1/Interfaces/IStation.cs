@@ -13,6 +13,6 @@ namespace TestWorkDirectum.Interfaces
 
         public void RegisterPhone(IPhone phone);
 
-        public bool ProcessCall(IPhone phone, string contactNumber);
+        public bool ProcessCall(IPhone phone);
     }
 }

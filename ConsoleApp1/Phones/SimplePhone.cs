@@ -94,15 +94,16 @@ namespace TestWorkDirectum.Phones
         {
             //TODO: Перед звонком сделать проверку что телефон законнекчен к станции.
             //Console.WriteLine($"Абонент '{this.SimNumber}' пытается вызвать абонента '{contactNumber}'");
-            var result = BaseStation?.ProcessCall(this, contactNumber); //зарегистрирован на станции? если базовая станция не создана - вызов не происходит
+            var result = BaseStation?.ProcessCall(this); //зарегистрирован на станции? если базовая станция не создана - вызов не происходит
 
             if (result.Equals(true))
             {
-                Console.WriteLine($"Обрабатываем исходящий вызов абонента'{this.SimNumber}', соединяем с абонентом '{contactNumber}'");
+                Console.WriteLine($"Телефон '{this.SimNumber}': идет соединение с абонентом '{contactNumber}'");
             }
             else
             {
-                Console.WriteLine($"Абоненту '{this.SimNumber}' не удалось вызвать абонента '{contactNumber}' по причине отсутствия регистрации абонента на станции");
+                Console.WriteLine($"Телефон '{this.SimNumber}': не удалось вызвать абонента '{contactNumber}' по причине отсутствия регистрации на станции.");
+                Console.WriteLine($"Либо ваша SIM заблокирована, либо сеть не найдена");
             }
         }
 

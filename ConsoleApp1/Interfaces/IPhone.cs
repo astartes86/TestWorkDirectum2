@@ -23,7 +23,5 @@ namespace TestWorkDirectum.Interfaces
         protected List<Abonent> Abonents { get; }
 
         protected IStation BaseStation { get; }
-
-
     }
 }

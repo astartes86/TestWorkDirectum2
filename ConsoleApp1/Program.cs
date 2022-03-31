@@ -8,7 +8,7 @@ public static class Program
     public static void Main()
     {
         Console.WriteLine("Добро пожаловать в программу тестового задания 'Cтанции и телефоны'.");
-        Console.WriteLine("Для остановки вв");
+        Console.WriteLine("Для остановки Esc, для продолжния любой другой символ");
         var stations = new List<IStation>();
         stations.Add(new SimpleStation());              //stations[0]
         stations.Add(new Station3G());                  //stations[1]
@@ -39,12 +39,12 @@ public static class Program
         //public void Call(string contactNumber)
         //public void Call(Abonent abonent)
         //-------------------------------------------------------------------------------------------------
-        phones[1].ConnectToBase(stations[1]);//при включении телефон послал запрос на регистрацию - пример одиночный
-        phones[1].Call("+79828019521");
+//        phones[1].ConnectToBase(stations[1]);//при включении телефон послал запрос на регистрацию - пример одиночный
+//        phones[1].Call("+79828019666");
 
         Random x = new Random();//рандом для постепенного создания подключений телефонов
         Random y = new Random();//рандом для случайной станции
-        /*
+
         for (; ; )
         {
             int n = x.Next(100);
@@ -55,14 +55,13 @@ public static class Program
                 {
                     int number_station = y.Next(stations.Count);        //получаем номер какойто случайной станции из появившихся
                     phone.ConnectToBase(stations[number_station]);      
-                    //phones[2].Call("+79828019521");                   //типо звоним - если не зареган то звонок прекращаем
+                    phones[1].Call("+79828019521");                     //типо звоним - если не зареган то звонок прекращаем
                 }
             }
             if (n == 55)
                 if (Console.ReadKey().Key == ConsoleKey.Escape)         //выходим из приложения
                     break;
         }
-        */
 
         //Abonent abonent1 = new Abonent("Vladimir", "+79828019521");
         //phone3.Call(abonent1);
