@@ -84,7 +84,7 @@ namespace TestWorkDirectum.Phones
         }
 
         //функция коннектит имей к станции, то есть регистрирует
-        public void Registration(IStation station)
+        public virtual void Registration(IStation station)
         {
             BaseStation = station;      //создаем локальную станцию через интерфейс - то есть она либо 3ж либо обычная - и привязываем ее к конкретно указанной руками при вызове
             station.RegisterPhone(this);//эта станция вносит телефон в список зареганых на этой станции
@@ -95,7 +95,6 @@ namespace TestWorkDirectum.Phones
             //TODO: Перед звонком сделать проверку что телефон законнекчен к станции.
             //Console.WriteLine($"Абонент '{this.SimNumber}' пытается вызвать абонента '{contactNumber}'");
             var result = BaseStation?.ProcessCall(this); //зарегистрирован на станции? если базовая станция не создана - вызов не происходит
-
             if (result.Equals(true))
             {
                 Console.WriteLine($"Телефон '{this.SimNumber}': идет соединение с абонентом '{contactNumber}'");

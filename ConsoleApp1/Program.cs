@@ -12,7 +12,7 @@ public static class Program
         Console.WriteLine();
         var stations = new List<IStation>();
         stations.Add(new SimpleStation());              //stations[0]
-        stations.Add(new Station3G());                  //stations[1]
+        stations.Add(new Station3G(stations.Count));                  //stations[1]
         //SimpleStation station1 = new ();  - пример одиночный
         //внутри:
         //создали station1.RegisteredPhone          - метод: регистрирует телефоны - если уже регался, то в список RegisteredPhones не добавляем
@@ -73,7 +73,7 @@ public static class Program
                 {
                     int st = x.Next(stations.Count);
                     int ph = x.Next(phones.Count);
-                    stations[st].RegisteredPhones.Remove(phones[ph]);
+                    stations[st].RegisteredPhones.Remove(phones[ph]);       //тупо удаляем из списка по айдишникам коллекций основной проги
                     Console.WriteLine($"Станция: ID Абонента: '{ph}' был разрегистрирован на станции с ID ='{st}'");
                     Console.WriteLine();
                 }

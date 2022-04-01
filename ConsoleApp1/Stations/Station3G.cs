@@ -1,11 +1,15 @@
-﻿using TestWorkDirectum.Interfaces;
+﻿using System.Text;
+using TestWorkDirectum.Interfaces;
 
 namespace TestWorkDirectum.Stations
 {
-    internal class Station3G : SimpleStation//наследуем от класса SimpleStation, который в свою очередь реализует интерфейс IStation
+    internal class Station3G : SimpleStation    //наследуем от класса SimpleStation, который в свою очередь реализует интерфейс IStation
     {
-        public Station3G() : base() { }//наследуем все методы
-
+        public Station3G(int id) : base()       //наследуем все методы
+        {
+            St_id = id;
+        }
+        private int St_id;
         private List<IPhone> registeredPhones = new List<IPhone>();
         public List<IPhone> RegisteredPhones3g
         {
@@ -17,6 +21,22 @@ namespace TestWorkDirectum.Stations
             set
             {
                 registeredPhones = value;
+            }
+        }
+        public override void RegisterPhone(IPhone phone)
+        {
+            bool same = false;
+            foreach (var ph in RegisteredPhones) //проверили имеющийся список на повторения
+                if (ph == phone) same = true;
+            if (!same)
+            {
+                RegisteredPhones.Add(phone);
+                Console.WriteLine($"Станция: Абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' был зарегистрирован на станции 3G.");
+                Log_write(phone.SimNumber, phone.Imei, St_id);
+            }
+            else
+            {
+                Console.WriteLine($"Станция: Абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' УЖЕ зарегистрирован на станции 3G. Повторная регистрация не требуется.");
             }
         }
         /*
@@ -70,5 +90,16 @@ namespace TestWorkDirectum.Stations
             }
             return true;
         }
+
+        private void Log_write(string simnumber, string imei, int station)
+        {
+            FileStream fs = new FileStream("D:\\log.txt", FileMode.Create);
+            StreamWriter writer = new StreamWriter(fs, Encoding.Default);
+            //foreach (string line in myText)
+                writer.WriteLine(simnumber, imei, station);
+            //writer.WriteLine(str.Replace("Channel1.Device1.", "Kush."));
+            fs.Close();
+        }
+
     }
 }

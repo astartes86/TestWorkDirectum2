@@ -5,6 +5,5 @@
         public Phone3G( string codeImei, string sim) : base(codeImei, sim)
         {
         }
-
     }
 }
