@@ -9,6 +9,7 @@ public static class Program
     {
         Console.WriteLine("Добро пожаловать в программу тестового задания 'Cтанции и телефоны'.");
         Console.WriteLine("Для остановки Esc, для продолжния любой другой символ");
+        Console.WriteLine();
         var stations = new List<IStation>();
         stations.Add(new SimpleStation());              //stations[0]
         stations.Add(new Station3G());                  //stations[1]
@@ -25,9 +26,9 @@ public static class Program
         //создали station3g.ProcessCall             - --
         //-------------------------------------------------------------------------------------------------
         var phones = new List<IPhone>();
-        phones.Add(new SimplePhone("123412341234124", "+79828019521"));     //phones[0]
-        phones.Add(new Phone3G("332412347688664", "+79828019523"));         //phones[1]
-        phones.Add(new Phone3G("332412347688555", "+79828019555"));         //phones[2]
+        phones.Add(new SimplePhone("123412341234124", "+79828019000"));     //phones[0]
+        phones.Add(new Phone3G("332412347688664", "+79828019001"));         //phones[1]
+        phones.Add(new Phone3G("332412347688555", "+79828019002"));         //phones[2]
         //SimplePhone phone1 = new ("123412341234124", "+79828019521");         - пример одиночный
         //Phone3G phone3 = new("332412347688664", "+79828019523");              - пример одиночный
         //station1.RegisteredPhones.Add(phone1); - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался, для этого и создали функцию ConnectToBase - пример одиночный
@@ -50,24 +51,37 @@ public static class Program
             int n = x.Next(100);
             if (n == 55)
             {//наконец дождались что телефоны включились
-                Console.WriteLine("заново добавляем теже");
+                Console.WriteLine($"Регистрируем телефоны в сети. всего телефонов на данный момент - '{phones.Count}' станций - '{stations.Count}'");
                 foreach (var phone in phones)                           //все теелфоны коннектим к ближайшей(случайной) станции - при повторном включении дублируются в списке на станции
                 {
                     int number_station = x.Next(stations.Count);        //получаем номер какойто случайной станции из появившихся
 
                     phone.ConnectToBase(stations[number_station]);      
-                    phones[x.Next(phones.Count)].Call("+79828019521");                     //типо звоним - если не зареган то звонок прекращаем
                 }
+                Console.WriteLine();
             }
             if (n == 55)
-                if (Console.ReadKey().Key == ConsoleKey.Escape)         //выходим из приложения
-                    break;
+            {
+                Console.WriteLine("Для разрегистрации случайного телефона на случайной станции нажмите d");
+                Console.WriteLine("Для выхода нажмите пробел");        //выходим из приложения
+                ConsoleKey key = Console.ReadKey().Key;
+                Console.WriteLine();
+                if (key == ConsoleKey.D)
+                {
+                    int st = x.Next(stations.Count);
+                    int ph = x.Next(phones.Count);
+                    stations[st].RegisteredPhones.Remove(phones[ph]);
+                    Console.WriteLine($"Станция: ID Абонента: '{ph}' был разрегистрирован на станции с ID ='{st}'");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    if (key == ConsoleKey.Spacebar)
+                        break;
+                }
+            }
         }
-        Console.WriteLine("Для разрегистрации случайного телефона на случайной станции нажмите D");
-        if (Console.ReadKey().Key == ConsoleKey.D)
-        {
-            phones[x.Next(phones.Count)].DisconnectToBase(stations[x.Next(stations.Count)]);
-        }
+
 
         //Abonent abonent1 = new Abonent("Vladimir", "+79828019521");
         //phone3.Call(abonent1);

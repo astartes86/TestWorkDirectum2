@@ -111,12 +111,5 @@ namespace TestWorkDirectum.Phones
         {
            Call(abonent.PhoneNumber);
         }
-
-        public void DisconnectToBase(IStation station)
-        {
-            BaseStation = station;
-            station.UnregisterPhone(this);
-        }
-
     }
 }
