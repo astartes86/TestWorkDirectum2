@@ -19,7 +19,7 @@ namespace TestWorkDirectum.Stations
                 registeredPhones = value;
             }
         }
-
+        /*
         public override void RegisterPhone(IPhone phone)
         {
             //TODO! в условиях сказано
@@ -57,6 +57,7 @@ namespace TestWorkDirectum.Stations
                     }
                 }
         }
+        */
 
         //пришлось создать ибо 3g телефоны регаются в свой список и соответственно для 3g надо искать в обоих списках
         //

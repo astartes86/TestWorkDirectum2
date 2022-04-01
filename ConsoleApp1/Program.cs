@@ -47,25 +47,28 @@ public static class Program
         //Random y = new Random();//рандом для случайной станции
 
         for (; ; )
-        {
+        {   
+
             int n = x.Next(100);
             if (n == 55)
-            {//наконец дождались что телефоны включились
-                Console.WriteLine($"Регистрируем телефоны в сети. всего телефонов на данный момент - '{phones.Count}' станций - '{stations.Count}'");
-                foreach (var phone in phones)                           //все теелфоны коннектим к ближайшей(случайной) станции - при повторном включении дублируются в списке на станции
-                {
-                    int number_station = x.Next(stations.Count);        //получаем номер какойто случайной станции из появившихся
-
-                    phone.ConnectToBase(stations[number_station]);      
-                }
-                Console.WriteLine();
-            }
-            if (n == 55)
             {
-                Console.WriteLine("Для разрегистрации случайного телефона на случайной станции нажмите d");
-                Console.WriteLine("Для выхода нажмите пробел");        //выходим из приложения
                 ConsoleKey key = Console.ReadKey().Key;
+                Console.WriteLine("Для разрегистрации случайного телефона на случайной станции нажмите d");
+                Console.WriteLine("Для регистрации телефонов нажмите p");
+                Console.WriteLine("Для выхода нажмите пробел");        //выходим из приложения
                 Console.WriteLine();
+                if (key == ConsoleKey.P)//наконец дождались что телефоны включились
+                {
+                    Console.WriteLine($"Регистрируем телефоны в сети. всего телефонов на данный момент - '{phones.Count}' станций - '{stations.Count}'");
+                    foreach (var phone in phones)                           //все теелфоны коннектим к ближайшей(случайной) станции - при повторном включении дублируются в списке на станции
+                    {
+                        int number_station = x.Next(stations.Count);        //получаем номер какойто случайной станции из появившихся
+
+                        phone.Registration(stations[number_station]);      
+                    }
+                    Console.WriteLine();
+                }
+                else
                 if (key == ConsoleKey.D)
                 {
                     int st = x.Next(stations.Count);
@@ -75,10 +78,8 @@ public static class Program
                     Console.WriteLine();
                 }
                 else
-                {
                     if (key == ConsoleKey.Spacebar)
                         break;
-                }
             }
         }
 

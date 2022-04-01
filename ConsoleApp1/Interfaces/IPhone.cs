@@ -14,7 +14,7 @@ namespace TestWorkDirectum.Interfaces
 
         public string SimNumber { get; set; }
 
-        public void ConnectToBase(IStation station);
+        public void Registration(IStation station);
 
         public void Call(string contactNumber);
 
