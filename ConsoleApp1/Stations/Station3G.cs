@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using TestWorkDirectum.Interfaces;
+using System.IO;
 
 namespace TestWorkDirectum.Stations
 {
@@ -93,12 +94,14 @@ namespace TestWorkDirectum.Stations
 
         private void Log_write(string simnumber, string imei, int station)
         {
-            FileStream fs = new FileStream("D:\\log.txt", FileMode.Create);
-            StreamWriter writer = new StreamWriter(fs, Encoding.Default);
+            string[] line = { "new phone registrations", "PHONE :: SIM: " + simnumber + " IMEI: " + imei + "Number of staion: " + Convert.ToString(station) };
+            File.AppendAllLines("D:\\log.txt", line);
+            //FileStream fs = new FileStream("D:\\log.txt", FileMode.Create);
+            //StreamWriter writer = new StreamWriter(fs, Encoding.Default);
             //foreach (string line in myText)
-                writer.WriteLine(simnumber, imei, station);
+            //writer.WriteLine(line);//simnumber, imei, station);
             //writer.WriteLine(str.Replace("Channel1.Device1.", "Kush."));
-            fs.Close();
+            //fs.Close();
         }
 
     }
