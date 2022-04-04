@@ -8,7 +8,7 @@ public static class Program
     public static void Main()
     {
         Console.WriteLine("Добро пожаловать в программу тестового задания 'Cтанции и телефоны'.");
-        Console.WriteLine("Для остановки Esc, для продолжния любой другой символ");
+        Console.WriteLine("Для остановки - пробел, для регистрации телефонов нажмите p");
         Console.WriteLine();
         var stations = new List<IStation>();
         stations.Add(new SimpleStation());              //stations[0]
@@ -53,6 +53,7 @@ public static class Program
             if (n == 55)
             {
                 ConsoleKey key = Console.ReadKey().Key;
+                Console.WriteLine();
                 Console.WriteLine("Для разрегистрации случайного телефона на случайной станции нажмите d");
                 Console.WriteLine("Для регистрации телефонов нажмите p");
                 Console.WriteLine("Для выхода нажмите пробел");        //выходим из приложения
@@ -60,6 +61,9 @@ public static class Program
                 if (key == ConsoleKey.P)//наконец дождались что телефоны включились
                 {
                     Console.WriteLine($"Регистрируем телефоны в сети. всего телефонов на данный момент - '{phones.Count}' станций - '{stations.Count}'");
+                    List<string> myText = new List<string>();
+                    myText.Add("New phone registrations:");                 
+                    File.AppendAllLines("D:\\log.txt", myText);             //шапку в файл сразу пишем
                     foreach (var phone in phones)                           //все теелфоны коннектим к ближайшей(случайной) станции - при повторном включении дублируются в списке на станции
                     {
                         int number_station = x.Next(stations.Count);        //получаем номер какойто случайной станции из появившихся
