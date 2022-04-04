@@ -26,19 +26,23 @@ namespace TestWorkDirectum.Stations
         }
         public override void RegisterPhone(IPhone phone)
         {
+            List<string> myText = new List<string>();
             bool same = false;
+            myText.Add("New phone registrations:");
             foreach (var ph in RegisteredPhones) //проверили имеющийся список на повторения
                 if (ph == phone) same = true;
             if (!same)
             {
                 RegisteredPhones.Add(phone);
                 Console.WriteLine($"Станция: Абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' был зарегистрирован на станции 3G.");
-                Log_write(phone.SimNumber, phone.Imei, St_id);
+                myText.Add("PHONE :: SIM: " + phone.SimNumber + " IMEI: " + phone.Imei + "Number of staion: " + Convert.ToString(St_id));
+                //Log_write(phone.SimNumber, phone.Imei, St_id);
             }
             else
             {
                 Console.WriteLine($"Станция: Абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' УЖЕ зарегистрирован на станции 3G. Повторная регистрация не требуется.");
             }
+            File.AppendAllLines("D:\\log.txt", myText);
         }
         /*
         public override void RegisterPhone(IPhone phone)
