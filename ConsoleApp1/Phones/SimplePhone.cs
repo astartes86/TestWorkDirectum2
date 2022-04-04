@@ -11,9 +11,9 @@ namespace TestWorkDirectum.Phones
         public SimplePhone(string codeImei, string sim)
         {
             Imei = codeImei;
-
             //TODO: проверка на то что это именно номер телефона.
             SimNumber = sim;
+            Console.WriteLine($"И создал Бог телефон с номером SIM: '{this.SimNumber}' и IMEI '{this.Imei}'");
         }
 
         //описываем имей

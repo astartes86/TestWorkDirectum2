@@ -9,6 +9,7 @@ namespace TestWorkDirectum.Stations
         public Station3G(int id) : base()       //наследуем все методы
         {
             St_id = id;
+            Console.WriteLine($"А станция то 3G оказалась с номером: '{St_id}' ");
         }
         private int St_id;
         private List<IPhone> registeredPhones = new List<IPhone>();
@@ -18,7 +19,6 @@ namespace TestWorkDirectum.Stations
             {
                 return registeredPhones;
             }
-
             set
             {
                 registeredPhones = value;
@@ -95,18 +95,5 @@ namespace TestWorkDirectum.Stations
             }
             return true;
         }
-
-        private void Log_write(string simnumber, string imei, int station)
-        {
-            string[] line = { "new phone registrations", "PHONE :: SIM: " + simnumber + " IMEI: " + imei + "Number of staion: " + Convert.ToString(station) };
-            File.AppendAllLines("D:\\log.txt", line);
-            //FileStream fs = new FileStream("D:\\log.txt", FileMode.Create);
-            //StreamWriter writer = new StreamWriter(fs, Encoding.Default);
-            //foreach (string line in myText)
-            //writer.WriteLine(line);//simnumber, imei, station);
-            //writer.WriteLine(str.Replace("Channel1.Device1.", "Kush."));
-            //fs.Close();
-        }
-
     }
 }

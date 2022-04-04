@@ -7,8 +7,8 @@ public static class Program
 {
     public static void Main()
     {
-        Console.WriteLine("Добро пожаловать в программу тестового задания 'Cтанции и телефоны'.");
-        Console.WriteLine("Для остановки - пробел, для регистрации телефонов нажмите p");
+        Console.WriteLine("Добро пожаловать в имитационную программу тестового задания 'Cтанции и телефоны'.");
+        Console.WriteLine("Для останова программы - пробел, для дальнейшей работы и получения новой информации - 0");
         Console.WriteLine();
         var stations = new List<IStation>();
         stations.Add(new SimpleStation());              //stations[0]
@@ -31,7 +31,7 @@ public static class Program
         phones.Add(new Phone3G("332412347688555", "+79828019002"));         //phones[2]
         //SimplePhone phone1 = new ("123412341234124", "+79828019521");         - пример одиночный
         //Phone3G phone3 = new("332412347688664", "+79828019523");              - пример одиночный
-        //station1.RegisteredPhones.Add(phone1); - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался, для этого и создали функцию ConnectToBase - пример одиночный
+        //station1.RegisteredPhones.Add(phone1); - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался, для этого и создаем функцию ConnectToBase - пример одиночный
         //public string Imei
         //public string SimNumber
         //public IStation BaseStation
@@ -54,15 +54,16 @@ public static class Program
             {
                 ConsoleKey key = Console.ReadKey().Key;
                 Console.WriteLine();
-                Console.WriteLine("Для разрегистрации случайного телефона на случайной станции нажмите d");
-                Console.WriteLine("Для регистрации телефонов нажмите p");
+                Console.WriteLine("Введите для создания : 3g телефона - a, базового телефона - b, 3g станции - c, базовой станции - d");
+                Console.WriteLine("Для регистрации телефонов нажмите r");
+                Console.WriteLine("Для разрегистрации случайного телефона на случайной станции нажмите k");
                 Console.WriteLine("Для выхода нажмите пробел");        //выходим из приложения
                 Console.WriteLine();
-                if (key == ConsoleKey.P)//наконец дождались что телефоны включились
+                if (key == ConsoleKey.R)//наконец дождались что телефоны включились
                 {
-                    Console.WriteLine($"Регистрируем телефоны в сети. всего телефонов на данный момент - '{phones.Count}' станций - '{stations.Count}'");
+                    Console.WriteLine($"Регистрируем телефоны в сети на случайной станции. всего телефонов на данный момент - '{phones.Count}' станций - '{stations.Count}'");
                     List<string> myText = new List<string>();
-                    myText.Add("New phone registrations:");                 
+                    myText.Add("New phone registrations:");
                     File.AppendAllLines("D:\\log.txt", myText);             //шапку в файл сразу пишем
                     foreach (var phone in phones)                           //все теелфоны коннектим к ближайшей(случайной) станции - при повторном включении дублируются в списке на станции
                     {
@@ -73,13 +74,37 @@ public static class Program
                     Console.WriteLine();
                 }
                 else
-                if (key == ConsoleKey.D)
+                if (key == ConsoleKey.K)
                 {
                     int st = x.Next(stations.Count);
                     int ph = x.Next(phones.Count);
                     stations[st].RegisteredPhones.Remove(phones[ph]);       //тупо удаляем из списка по айдишникам коллекций основной проги
                     Console.WriteLine($"Станция: ID Абонента: '{ph}' был разрегистрирован на станции с ID ='{st}'");
                     Console.WriteLine();
+                }
+                if (key == ConsoleKey.A)
+                {
+                    Console.WriteLine("Введите номер SIM телефона 3g через +7: ");
+                    string sim = Console.ReadLine();
+                    Console.WriteLine("Введите номер IMEI(15 цифр) телефона 3g: ");
+                    string imei = Console.ReadLine();
+                    phones.Add(new Phone3G(imei, sim));
+                }
+                if (key == ConsoleKey.B)
+                {
+                    Console.WriteLine("Введите номер SIM телефона через +7: ");
+                    string sim = Console.ReadLine();
+                    Console.WriteLine("Введите номер IMEI(15 цифр): ");
+                    string imei = Console.ReadLine();
+                    phones.Add(new SimplePhone(imei, sim));
+                }
+                if (key == ConsoleKey.C)
+                {
+                    stations.Add(new Station3G(stations.Count));
+                }
+                if (key == ConsoleKey.D)
+                {
+                    stations.Add(new SimpleStation());
                 }
                 else
                     if (key == ConsoleKey.Spacebar)

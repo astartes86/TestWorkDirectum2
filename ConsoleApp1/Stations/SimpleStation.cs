@@ -6,7 +6,7 @@ namespace TestWorkDirectum.Stations
     {
         public SimpleStation()
         {
-
+            Console.WriteLine($"И создал Бог базовую станцию ");
         }
         //описываем зарег телефоны
 
