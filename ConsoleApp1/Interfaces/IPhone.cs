@@ -20,8 +20,10 @@ namespace TestWorkDirectum.Interfaces
 
         public void Call(Abonent abonent);
 
-        protected List<Abonent> Abonents { get; }
+        public List<Abonent> Abonents { get; }
 
         protected IStation BaseStation { get; }
+
+        public void CollectNumber(Abonent abonent);
     }
 }

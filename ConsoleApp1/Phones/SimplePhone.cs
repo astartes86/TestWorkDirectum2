@@ -6,17 +6,17 @@ namespace TestWorkDirectum.Phones
     internal class SimplePhone : IPhone //класс реализует интерфейс, обязуется выполнить все методы интерфейса! через запятую можно выполнить другой интерфейс
     {
         //private string imei;
-        //private string simNumber;
+        private string simNumber;
         //private IStation baseStation;
         public SimplePhone(string codeImei, string sim)
         {
             Imei = codeImei;
             //TODO: проверка на то что это именно номер телефона.
             SimNumber = sim;
-            Console.WriteLine($"И создал Бог телефон с номером SIM: '{this.SimNumber}' и IMEI '{this.Imei}'");
+            Console.WriteLine($"И создал Бог телефон с номером SIM: '{SimNumber}' и IMEI '{Imei}'");
         }
 
-        //описываем имей
+        //описываем имей 
         public string Imei
         {
             get;
@@ -38,53 +38,41 @@ namespace TestWorkDirectum.Phones
         //описываем номер сим = номер телефона
         public string SimNumber
         {
-            get;
-            //{
-            //        return simNumber;
-            //}
+            get
+            {
+                    return simNumber;
+            }
 
-            set;
-            //{
-            //    if (value == "")
-            //        Console.WriteLine("SIM номер телефона не может быть пустым");
-            //    else if (simNumber != null)
-            //        Console.WriteLine("SIM номер телефона уже введен");
-            //    else
-            //        simNumber = value;
-            //}
+            set
+            {
+                if (value == "")
+                    Console.WriteLine("SIM номер телефона не может быть пустым");
+                else if (simNumber != null)
+                    Console.WriteLine("SIM номер телефона уже введен");
+                else
+                    simNumber = value;
+            }
         }
 
         //описываем станцию
-        public IStation BaseStation
-        {
-            get;
-            //{
-            //    return baseStation;
-            //}
-
-            set;
-            //{
-            //    baseStation = value;
-            //}
-        }
+        public IStation BaseStation { get; set; }
 
         //описываем зарег телефоны
-        //private List<Abonent> abonents = new List<Abonent>();
-        public List<Abonent> Abonents
+        private List<Abonent> abonents = new List<Abonent>();
+        public List<Abonent> Abonents //{ get; set; }
         {
-            get;
-            //{
-            //    return abonents;
-            //}
+            get
+            {
+                return abonents;
+            }
 
-            set;
-            //{
-            //    abonents = value;
-            //}
+            set
+            {
+                abonents = value;
+            }
         }
-
-        //функция коннектит имей к станции, то есть регистрирует
-        public virtual void Registration(IStation station)
+    //функция коннектит имей к станции, то есть регистрирует
+    public virtual void Registration(IStation station)
         {
             BaseStation = station;      //создаем локальную станцию через интерфейс - то есть она либо 3ж либо обычная - и привязываем ее к конкретно указанной руками при вызове
             station.RegisterPhone(this);//эта станция вносит телефон в список зареганых на этой станции
@@ -110,5 +98,12 @@ namespace TestWorkDirectum.Phones
         {
            Call(abonent.PhoneNumber);
         }
+
+        //функция регистрирует телефоны
+        public void CollectNumber(Abonent abonent)                      
+            {
+                Abonents.Add(abonent);
+                Console.WriteLine($"Телефон '{this.SimNumber}': Абонент с номером: '{abonent.PhoneNumber}' и номером '{abonent.NameAbonent}' был добавлен в справочник.");
+            }
     }
 }

@@ -10,16 +10,17 @@ namespace TestWorkDirectum.Structs
     {
         public Abonent(string name, string phoneNumber)
         {
-            mName = name;
-
+            //mName = name;
+            NameAbonent = name;
             //TODO: проверка на то что это именно номер телефона.
-            mPhoneNumber = phoneNumber;
+            //mPhoneNumber = phoneNumber;
+            PhoneNumber = phoneNumber;
         }
-        public string NameAbonent { get { return mName; } set { mName = value; } }
+        public string NameAbonent { get; set; }//{ get { return mName; } set { mName = value; } }
 
-        public string PhoneNumber { get { return mPhoneNumber; } set { mPhoneNumber = value; } }
+        public string PhoneNumber { get; set; }//{ get { return mPhoneNumber; } set { mPhoneNumber = value; } }
 
-        private string mName;
-        private string mPhoneNumber;   
+        //private string mName;
+        //private string mPhoneNumber;   
     }
 }
