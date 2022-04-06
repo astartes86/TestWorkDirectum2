@@ -19,7 +19,7 @@ public static class Program
         //создали station1.RegisteredPhone          - метод: регистрирует телефоны - если уже регался, то в список RegisteredPhones не добавляем
         //создали station1.RegisteredPhones         - список зарег. простых телефонов
         //создали station1.ProcessCall              - метод: смотрит RegisteredPhones - если есть то звони пожалуйста
-        //Station3G station3g = new ();     - пример одиночный
+        //Station3G station3g = new ();             - пример одиночный
         //внутри:
         //создали station3g.RegisteredPhone         - переопределеный метод: добавляет либо в список RegisteredPhones либо в список RegisteredPhones3g? реализовать второе осталось
         //создали station3g.RegisteredPhones        - --
@@ -27,7 +27,9 @@ public static class Program
         //создали station3g.ProcessCall             - --
         //-------------------------------------------------------------------------------------------------
         var phones = new List<IPhone>();
-        phones.Add(new SimplePhone("123456789012345", "+75671119111"));     //phones[0]
+        var ph_List = new PhoneList();
+        //phones.Add(new SimplePhone("123456789012345", "+75671119111"));     //phones[0]
+        ph_List.Add("123456789012345", "+75671119111");
         phones.Add(new Phone3G("223456789012346", "+75672229222"));         //phones[1]
         phones.Add(new Phone3G("323456789012347", "+75673339333"));         //phones[2]
         //SimplePhone phone1 = new ("123412341234124", "+79828019521");         - пример одиночный
@@ -47,7 +49,6 @@ public static class Program
         //Random y = new Random();//рандом для случайной станции
         for (; ; )
         {   
-
             int n = x.Next(100);
             if (n == 55)
             {
@@ -59,7 +60,6 @@ public static class Program
                 Console.WriteLine("Добавляем в справочник первого телефона три контакта - y");
                 Console.WriteLine("Звоним контакту первого телефона - u");
                 Console.WriteLine("Для выхода нажмите пробел");
-                Console.WriteLine();
                 ConsoleKey key = Console.ReadKey().Key;
                 Console.WriteLine();
                 if (key == ConsoleKey.R)                                    //регистрируем:

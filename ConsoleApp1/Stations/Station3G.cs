@@ -14,8 +14,6 @@ namespace TestWorkDirectum.Stations
 
         private int St_id;
 
-        public List<IPhone> RegisteredPhones3g { get; set; }
-
         public override void RegisterPhone(IPhone phone)
         {
             List<string> myText = new List<string>();
@@ -37,11 +35,9 @@ namespace TestWorkDirectum.Stations
             File.AppendAllLines("D:\\log.txt", myText);
         }
 
-        //пришлось переопределить ибо 3g телефоны регаются в свой список и соответственно для 3g надо искать в обоих списках
-        //
         public override bool ProcessCall(IPhone phone)      // true - зареган, false - нет зареган
         {
-            if (!RegisteredPhones.Contains(phone) && !RegisteredPhones3g.Contains(phone))        //не найден в обоих списках
+            if (!RegisteredPhones.Contains(phone))        //не найден в обоих списках
             {
                 Console.WriteLine($"Станция: Номер '{phone.SimNumber}' НЕ зарегистрирован на станции 3G!");
                 return false;
