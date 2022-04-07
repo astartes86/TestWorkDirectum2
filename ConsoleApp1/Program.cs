@@ -30,8 +30,8 @@ public static class Program
         var phoneslist = new PhoneList();
         //phones.Add(new SimplePhone("123456789012345", "+75671119111"));     //phones[0]
         phoneslist.Add("123456789012345", "+75671119111","");
-        phoneslist.Add("123456789012345", "+75671119111","");         //phones[1]
-        phoneslist.Add("123456789012345", "+75671119111","3g");         //phones[2]
+        phoneslist.Add("123456789055555", "+75672229222","");         //phones[1]
+        phoneslist.Add("123456789066666", "+75673339333","3g");         //phones[2]
         //SimplePhone phone1 = new ("123412341234124", "+79828019521");         - пример одиночный
         //Phone3G phone3 = new("332412347688664", "+79828019523");              - пример одиночный
         //station1.RegisteredPhones.Add(phone1);    - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался, для этого и созда функцию ConnectToBase - пример одиночный

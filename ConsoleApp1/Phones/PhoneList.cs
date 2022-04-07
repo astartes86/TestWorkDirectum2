@@ -13,7 +13,7 @@ namespace TestWorkDirectum.Phones
         {
             if (codeImei != "" && codeImei.Length == 15 && IsLetterContains(codeImei) && sim != "" && sim.Length == 12 && sim[0] == '+' && IsLetterContainsFrom(sim))
             {
-                if (Flag3g == "3g")
+                if (Flag3g != "3g")
                     this.Add(new SimplePhone(codeImei, sim));
                 else
                     this.Add(new Phone3G(codeImei, sim));
@@ -30,7 +30,7 @@ namespace TestWorkDirectum.Phones
                 {
                     codeImei = RndStr(15);
                     sim = '+' + RndStr(11);
-                    if (Flag3g == "3g")
+                    if (Flag3g != "3g")
                         this.Add(new SimplePhone(codeImei, sim));
                     else
                         this.Add(new Phone3G(codeImei, sim));
