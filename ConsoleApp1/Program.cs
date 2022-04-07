@@ -26,20 +26,20 @@ public static class Program
         //создали station3g.RegisteredPhones3g      - список зарег. 3g телефонов
         //создали station3g.ProcessCall             - --
         //-------------------------------------------------------------------------------------------------
-        var phones = new List<IPhone>();
-        var ph_List = new PhoneList();
+        //var phones = new List<IPhone>();
+        var phoneslist = new PhoneList();
         //phones.Add(new SimplePhone("123456789012345", "+75671119111"));     //phones[0]
-        ph_List.Add("123456789012345", "+75671119111");
-        phones.Add(new Phone3G("223456789012346", "+75672229222"));         //phones[1]
-        phones.Add(new Phone3G("323456789012347", "+75673339333"));         //phones[2]
+        phoneslist.Add("123456789012345", "+75671119111","");
+        phoneslist.Add("123456789012345", "+75671119111","");         //phones[1]
+        phoneslist.Add("123456789012345", "+75671119111","3g");         //phones[2]
         //SimplePhone phone1 = new ("123412341234124", "+79828019521");         - пример одиночный
         //Phone3G phone3 = new("332412347688664", "+79828019523");              - пример одиночный
-        //station1.RegisteredPhones.Add(phone1); - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался, для этого и созда функцию ConnectToBase - пример одиночный
+        //station1.RegisteredPhones.Add(phone1);    - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался, для этого и созда функцию ConnectToBase - пример одиночный
         //public string Imei
         //public string SimNumber
         //public IStation BaseStation
         //public List<Abonent> Abonents
-        //public void ConnectToBase(IStation station)
+        //public void ConnectToBase(IStation station)   -переименовываем на Registration
         //public void Call(string contactNumber)
         //public void Call(Abonent abonent)
         //-------------------------------------------------------------------------------------------------
@@ -64,11 +64,11 @@ public static class Program
                 Console.WriteLine();
                 if (key == ConsoleKey.R)                                    //регистрируем:
                 {
-                    Console.WriteLine($"Регистрируем телефоны в сети на случайной станции. всего телефонов на данный момент - '{phones.Count}' станций - '{stations.Count}'");
+                    Console.WriteLine($"Регистрируем телефоны в сети на случайной станции. всего телефонов на данный момент - '{phoneslist.Count}' станций - '{stations.Count}'");
                     List<string> myText = new List<string>();
-                    myText.Add("New phone registrations:");
+                    myText.Add(DateTime.Now + " New phone registrations:");
                     File.AppendAllLines("D:\\log.txt", myText);             //шапку в файл сразу пишем чтоб было более понятно
-                    foreach (var phone in phones)                           //все теелфоны коннектим к ближайшей(случайной) станции - при повторном включении дублируются в списке на станции
+                    foreach (var phone in phoneslist)                           //все теелфоны коннектим к ближайшей(случайной) станции - при повторном включении дублируются в списке на станции
                     {
                         int number_station = x.Next(stations.Count);        //получаем номер какойто случайной станции из появившихся
                         phone.Registration(stations[number_station]);      
@@ -79,8 +79,8 @@ public static class Program
                 if (key == ConsoleKey.K)                                    //разрегистрируем одного случайного:
                 {
                     int st = x.Next(stations.Count);
-                    int ph = x.Next(phones.Count);
-                    stations[st].RegisteredPhones.Remove(phones[ph]);       //тупо удаляем из списка по айдишникам коллекций основной проги
+                    int ph = x.Next(phoneslist.Count);
+                    stations[st].RegisteredPhones.Remove(phoneslist[ph]);       //тупо удаляем из списка по айдишникам коллекций основной проги
                     Console.WriteLine($"Станция: ID Абонента: '{ph}' был разрегистрирован на станции с ID ='{st}'");
                     Console.WriteLine();
                 }
@@ -91,7 +91,7 @@ public static class Program
                     string sim = Console.ReadLine();
                     Console.Write("Введите номер IMEI(15 цифр) телефона 3g: ");
                     string imei = Console.ReadLine();
-                    phones.Add(new Phone3G(imei, sim));
+                    phoneslist.Add(imei, sim, "3g");
                 }
                 else
                 if (key == ConsoleKey.B)
@@ -100,7 +100,7 @@ public static class Program
                     string sim = Console.ReadLine();
                     Console.Write("Введите номер IMEI(15 цифр): ");
                     string imei = Console.ReadLine();
-                    phones.Add(new SimplePhone(imei, sim));
+                    phoneslist.Add(imei, sim, "");
                 }
                 else
                 if (key == ConsoleKey.C)
@@ -115,21 +115,21 @@ public static class Program
                 else
                 if (key == ConsoleKey.T)                                    //исходящий звонок со случайного номера из имеющихся
                 {
-                    int ph = x.Next(phones.Count);
-                    phones[ph].Call("+79826661666");
+                    int ph = x.Next(phoneslist.Count);
+                    phoneslist[ph].Call("+79826661666");
                 }
                 else
                 if (key == ConsoleKey.Y)                                    //создаем список
                 {
-                    phones[0].CollectNumber(new Abonent("Vladimir", "+79828019521"));
-                    phones[0].CollectNumber(new Abonent("Ivan", "+79824449444"));
-                    phones[0].CollectNumber(new Abonent("Artur", "+79824449444"));
+                    phoneslist[0].CollectNumber(new Abonent("Vladimir", "+79828019521"));
+                    phoneslist[0].CollectNumber(new Abonent("Ivan", "+79824449444"));
+                    phoneslist[0].CollectNumber(new Abonent("Artur", "+79824449444"));
                 }
                 if (key == ConsoleKey.U)                                    //исходящий звонок со случайного номера из имеющихся но по имени в справочнике
                 {
                     Console.Write("Введите имя: ");
                     string name = Console.ReadLine();
-                    phones[0].Call(name);
+                    phoneslist[0].Call(name);
                 }
                 else
                     if (key == ConsoleKey.Spacebar)                         //выходим из приложения

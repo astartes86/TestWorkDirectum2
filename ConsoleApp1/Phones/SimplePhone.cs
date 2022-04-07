@@ -12,9 +12,9 @@ namespace TestWorkDirectum.Phones
 
         public SimplePhone(string codeImei, string sim)
         {
-            imei = codeImei;
+            Imei = codeImei;
             //TODO: проверка на то что это именно номер телефона.
-            simNumber = sim;
+            SimNumber = sim;
             Console.WriteLine($"И создал Бог телефон с номером SIM: '{SimNumber}' и IMEI '{Imei}'");
         }
 
