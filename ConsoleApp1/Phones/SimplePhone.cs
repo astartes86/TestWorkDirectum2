@@ -29,7 +29,19 @@ namespace TestWorkDirectum.Phones
         public IStation BaseStation { get; set; }
 
         //описываем зарег телефоны
-        public List<Abonent> Abonents { get; set; }
+        List<Abonent> abonents = new();                                 //для коллекции всегда надо прописать аксессоры!
+        public List<Abonent> Abonents //{ get; set; }
+        {
+            get
+            {
+                return abonents;
+            }
+
+        set
+            {
+                abonents = value;
+            }
+        }
 
         //функция коннектит имей к станции, то есть регистрирует
         public virtual void Registration(IStation station)

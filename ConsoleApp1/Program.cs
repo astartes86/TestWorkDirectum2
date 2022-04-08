@@ -121,9 +121,9 @@ public static class Program
                 else
                 if (key == ConsoleKey.Y)                                    //создаем список
                 {
-                    phoneslist[0].CollectNumber(new Abonent("Vladimir", "+79828019521"));
+                    phoneslist[0].CollectNumber(new Abonent("Vladimir", "+79828819521"));
                     phoneslist[0].CollectNumber(new Abonent("Ivan", "+79824449444"));
-                    phoneslist[0].CollectNumber(new Abonent("Artur", "+79824449444"));
+                    phoneslist[0].CollectNumber(new Abonent("Artur", "+79825559555"));
                 }
                 if (key == ConsoleKey.U)                                    //исходящий звонок со случайного номера из имеющихся но по имени в справочнике
                 {
