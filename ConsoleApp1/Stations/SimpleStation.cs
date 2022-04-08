@@ -53,7 +53,7 @@ namespace TestWorkDirectum.Stations
                 Console.WriteLine($"Станция: Номер '{phone.SimNumber}' НЕ зарегистрирован на станции!");
                 return false;   //выход из функции со значением
             }
-            return true; 
+            return true;
         }
     }
 }

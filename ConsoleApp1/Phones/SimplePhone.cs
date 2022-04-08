@@ -37,7 +37,7 @@ namespace TestWorkDirectum.Phones
                 return abonents;
             }
 
-        set
+            set
             {
                 abonents = value;
             }
@@ -68,14 +68,15 @@ namespace TestWorkDirectum.Phones
 
         public void Call(Abonent abonent)
         {
-           Call(abonent.PhoneNumber);
+            Call(abonent.PhoneNumber);
         }
 
         //функция регистрирует телефоны
-        public void CollectNumber(Abonent abonent)                      
-            {
-                Abonents.Add(abonent);
-                Console.WriteLine($"Телефон '{this.SimNumber}': Абонент с номером: '{abonent.PhoneNumber}' и номером '{abonent.NameAbonent}' был добавлен в справочник.");
-            }
+        public void CollectNumber(Abonent abonent)
+        {
+            Abonents.Add(abonent);
+            Console.WriteLine($"Телефон '{this.SimNumber}': Абонент с номером: '{abonent.PhoneNumber}' и номером '{abonent.NameAbonent}' был добавлен в справочник.");
+            Console.WriteLine($"Телефон '{this.SimNumber}': Абонент с номером: '{abonent.PhoneNumber}' и номером '{abonent.NameAbonent}' был добавлен в справочник.");
+        }
     }
 }

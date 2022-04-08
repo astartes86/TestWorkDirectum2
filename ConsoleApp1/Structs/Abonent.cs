@@ -13,7 +13,6 @@ namespace TestWorkDirectum.Structs
             NameAbonent = name;
             PhoneNumber = phoneNumber;
             //TODO: проверка на то что это именно номер телефона.
-
         }
 
         public string NameAbonent { get; set; }

@@ -29,26 +29,26 @@ public static class Program
         //var phones = new List<IPhone>();
         var phoneslist = new PhoneList();
         //phones.Add(new SimplePhone("123456789012345", "+75671119111"));     //phones[0]
-        phoneslist.Add("123456789012345", "+75671119111","");
-        phoneslist.Add("123456789055555", "+75672229222","");         //phones[1]
-        phoneslist.Add("123456789066666", "+75673339333","3g");         //phones[2]
-        //SimplePhone phone1 = new ("123412341234124", "+79828019521");         - пример одиночный
-        //Phone3G phone3 = new("332412347688664", "+79828019523");              - пример одиночный
-        //station1.RegisteredPhones.Add(phone1);    - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался, для этого и созда функцию ConnectToBase - пример одиночный
-        //public string Imei
-        //public string SimNumber
-        //public IStation BaseStation
-        //public List<Abonent> Abonents
-        //public void ConnectToBase(IStation station)   -переименовываем на Registration
-        //public void Call(string contactNumber)
-        //public void Call(Abonent abonent)
-        //-------------------------------------------------------------------------------------------------
-//        phones[1].ConnectToBase(stations[1]);//при включении телефон послал запрос на регистрацию - пример одиночный
-//        phones[1].Call("+79828019666");
+        phoneslist.Add("123456789012345", "+75671119111", "");
+        phoneslist.Add("123456789055555", "+75672229222", "");         //phones[1]
+        phoneslist.Add("123456789066666", "+75673339333", "3g");         //phones[2]
+                                                                         //SimplePhone phone1 = new ("123412341234124", "+79828019521");         - пример одиночный
+                                                                         //Phone3G phone3 = new("332412347688664", "+79828019523");              - пример одиночный
+                                                                         //station1.RegisteredPhones.Add(phone1);    - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался, для этого и созда функцию ConnectToBase - пример одиночный
+                                                                         //public string Imei
+                                                                         //public string SimNumber
+                                                                         //public IStation BaseStation
+                                                                         //public List<Abonent> Abonents
+                                                                         //public void ConnectToBase(IStation station)   -переименовываем на Registration
+                                                                         //public void Call(string contactNumber)
+                                                                         //public void Call(Abonent abonent)
+                                                                         //-------------------------------------------------------------------------------------------------
+                                                                         //        phones[1].ConnectToBase(stations[1]);//при включении телефон послал запрос на регистрацию - пример одиночный
+                                                                         //        phones[1].Call("+79828019666");
         Random x = new Random();//рандом для постепенного создания подключений телефонов
         //Random y = new Random();//рандом для случайной станции
         for (; ; )
-        {   
+        {
             int n = x.Next(100);
             if (n == 55)
             {
@@ -71,7 +71,7 @@ public static class Program
                     foreach (var phone in phoneslist)                           //все теелфоны коннектим к ближайшей(случайной) станции - при повторном включении дублируются в списке на станции
                     {
                         int number_station = x.Next(stations.Count);        //получаем номер какойто случайной станции из появившихся
-                        phone.Registration(stations[number_station]);      
+                        phone.Registration(stations[number_station]);
                     }
                     Console.WriteLine();
                 }
