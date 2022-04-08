@@ -53,6 +53,7 @@ public static class Program
             if (n == 55)
             {
                 Console.WriteLine();
+                Console.WriteLine("Получем количественную информацию о системе - o");
                 Console.WriteLine("Введите для создания : 3g телефона - a, базового телефона - b, 3g станции - c, базовой станции - d");
                 Console.WriteLine("Для регистрации телефонов нажмите r");
                 Console.WriteLine("Для разрегистрации случайного телефона на случайной станции нажмите k");
@@ -62,21 +63,20 @@ public static class Program
                 Console.WriteLine("Для выхода нажмите пробел");
                 ConsoleKey key = Console.ReadKey().Key;
                 Console.WriteLine();
-                if (key == ConsoleKey.R)                                    //регистрируем:
+                if (key == ConsoleKey.R)                                        //регистрируем:
                 {
                     Console.WriteLine($"Регистрируем телефоны в сети на случайной станции. всего телефонов на данный момент - '{phoneslist.Count}' станций - '{stations.Count}'");
                     List<string> myText = new List<string>();
                     myText.Add(DateTime.Now + " New phone registrations:");
-                    File.AppendAllLines("D:\\log.txt", myText);             //шапку в файл сразу пишем чтоб было более понятно
+                    File.AppendAllLines("D:\\log.txt", myText);                 //шапку в файл сразу пишем чтоб было более понятно
                     foreach (var phone in phoneslist)                           //все теелфоны коннектим к ближайшей(случайной) станции - при повторном включении дублируются в списке на станции
                     {
-                        int number_station = x.Next(stations.Count);        //получаем номер какойто случайной станции из появившихся
-                        phone.Registration(stations[number_station]);
+                        phone.Registration(stations[x.Next(stations.Count)]);   //получаем номер какойто случайной станции из созданных
                     }
                     Console.WriteLine();
                 }
                 else
-                if (key == ConsoleKey.K)                                    //разрегистрируем одного случайного:
+                if (key == ConsoleKey.K)                                        //разрегистрируем одного случайного:
                 {
                     int st = x.Next(stations.Count);
                     int ph = x.Next(phoneslist.Count);
@@ -132,7 +132,30 @@ public static class Program
                     phoneslist[0].Call(name);
                 }
                 else
-                    if (key == ConsoleKey.Spacebar)                         //выходим из приложения
+                if (key == ConsoleKey.O)                                    //итог текущий
+                {
+                    Console.WriteLine($"На данный момент имеем следующее. Всего телефонов на данный момент - '{phoneslist.Count}' станций - '{stations.Count}'");
+                    int Cnt_p = 0, Cnt_s = 0;
+                    int[] Cnt_r = { };//new int[stations.Count];
+                    //int Cnt_r = 0;
+                    foreach (var phone in phoneslist)
+                        if (phone is Phone3G)
+                        {
+                            Cnt_p++;
+                        }
+                    foreach (var st in stations)
+                        if (st is Station3G)
+                        {
+                            Cnt_s++;
+                            foreach (var R in st.RegisteredPhones)
+                                if (R is Phone3G)
+                                    Cnt_r[Cnt_s-1]++;
+                                    //Cnt_r++;
+                        }
+                    Console.WriteLine($"Телефонов 3g  - '{Cnt_p}'. Станций 3g  - '{Cnt_s}': зарегистрированных на них 3g телефонов - '{Cnt_r[0]}'.");
+                }
+                else
+                if (key == ConsoleKey.Spacebar)                         //выходим из приложения
                     break;
             }
         }
