@@ -10,13 +10,12 @@ namespace TestWorkDirectum.Phones
             Imei = codeImei;
             //TODO: проверка на то что это именно номер телефона.
             SimNumber = sim;
-            //Console.WriteLine($"И создал Бог телефон с номером SIM: '{SimNumber}' и IMEI '{Imei}'");
             mess_ph();
         }
 
         public virtual void mess_ph()
         {
-            Console.WriteLine($"И создал Бог телефон с номером SIM: '{SimNumber}' и IMEI '{Imei}'");
+            Console.WriteLine($"И был создан телефон с номером SIM: '{SimNumber}' и IMEI '{Imei}'");
         }
 
         //описываем имей 

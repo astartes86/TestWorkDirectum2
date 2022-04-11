@@ -15,6 +15,7 @@ public static class Program
         //stations.Add(new SimpleStation());                      //не смог сделать базу без параметра ибо выводится сообщение в теле конструктора
         stations.Add(new SimpleStation(stations.Count));
         stations.Add(new Station3G(stations.Count));
+        stations.Add(new Station3G(stations.Count));
         //SimpleStation station1 = new ();          - пример одиночный
         //внутри:
         //создали station1.RegisteredPhone          - метод: регистрирует телефоны - если уже регался, то в список RegisteredPhones не добавляем
@@ -33,6 +34,7 @@ public static class Program
         phoneslist.Add("123456789012345", "+75671119111", "");
         phoneslist.Add("123456789055555", "+75672229222", "");
         phoneslist.Add("123456789066666", "+75673339333", "3g");
+        phoneslist.Add("123456789077777", "+75678889888", "3g");
         //SimplePhone phone1 = new ("123412341234124", "+79828019521");         - пример одиночный
         //Phone3G phone3 = new("332412347688664", "+79828019523");              - пример одиночный
         //station1.RegisteredPhones.Add(phone1);                                - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался,
@@ -66,7 +68,7 @@ public static class Program
                 {
                     Console.WriteLine($"Регистрируем телефоны в сети на случайной станции. всего телефонов на данный момент - '{phoneslist.Count}' станций - '{stations.Count}'");
                     List<string> myText = new List<string>();
-                    myText.Add(DateTime.Now + " New phone registrations:");
+                    myText.Add(DateTime.Now + " New 3G phone registrations:");
                     File.AppendAllLines("D:\\log.txt", myText);                 //шапку в файл сразу пишем чтоб было более понятно
                     foreach (var phone in phoneslist)                           //все теелфоны коннектим к ближайшей(случайной) станции - при повторном включении дублируются в списке на станции
                     {
@@ -135,23 +137,32 @@ public static class Program
                 {
                     Console.WriteLine($"На данный момент имеем следующее. Всего телефонов на данный момент - '{phoneslist.Count}' станций - '{stations.Count}'");
                     int Cnt_p = 0, Cnt_s = 0;
-                    int[] Cnt_r = { };//new int[stations.Count];
+                    int[] Cnt_r = {};//new int[stations.Count];
                     //int Cnt_r = 0;
                     foreach (var phone in phoneslist)
                         if (phone is Phone3G)
                         {
                             Cnt_p++;
                         }
+                    Console.WriteLine($"Телефонов 3g  - '{Cnt_p}'.");
                     foreach (var st in stations)
                         if (st is Station3G)
                         {
                             Cnt_s++;
+                            Array.Resize(ref Cnt_r, Cnt_r.Length + 1);
                             foreach (var R in st.RegisteredPhones)
                                 if (R is Phone3G)
+                                {
+                                    //Array.Resize(ref Cnt_r, Cnt_r.Length + 1);
                                     Cnt_r[Cnt_s-1]++;
                                     //Cnt_r++;
+                                }
                         }
-                    Console.WriteLine($"Телефонов 3g  - '{Cnt_p}'. Станций 3g  - '{Cnt_s}': зарегистрированных на них 3g телефонов - '{Cnt_r[0]}'.");
+                    Console.WriteLine($"Станций 3g  - '{Cnt_s}'. Зарегистрированных на них 3g телефонов:");
+                    for (int i = 0; i < Cnt_r.Length; i++)
+                    {
+                        Console.WriteLine($"На станции под номером '{i+1}' - '{Cnt_r[i]}'");
+                    }
                 }
                 else
                 if (key == ConsoleKey.Spacebar)                         //выходим из приложения

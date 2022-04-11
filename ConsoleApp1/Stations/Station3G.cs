@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using TestWorkDirectum.Interfaces;
 using System.IO;
+using TestWorkDirectum.Phones;
 
 namespace TestWorkDirectum.Stations
 {
@@ -22,17 +23,24 @@ namespace TestWorkDirectum.Stations
             //myText.Add("New phone registrations:");
             foreach (var ph in RegisteredPhones) //проверили имеющийся список на повторения
                 if (ph == phone) same = true;
-            if (!same)
-            {
-                RegisteredPhones.Add(phone);
-                Console.WriteLine($"Станция: Абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' был зарегистрирован на станции 3G.");
-                myText.Add("PHONE :: SIM: " + phone.SimNumber + " IMEI: " + phone.Imei + " Number of staion: " + Convert.ToString(Id));
-                //Log_write(phone.SimNumber, phone.Imei, St_id);
-            }
-            else
-            {
-                Console.WriteLine($"Станция: Абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' УЖЕ зарегистрирован на станции 3G. Повторная регистрация не требуется.");
-            }
+                {
+                    if (!same)
+                    {
+                        RegisteredPhones.Add(phone);
+                        if (phone is Phone3G)
+                            myText.Add("Станция: Абонент 3g с номером SIM:" + phone.SimNumber + " и IMEI " + phone.Imei +
+                                                                    " был зарегистрирован на станции 3G под номером " + Convert.ToString(Id));
+                        else
+                            myText.Add("Станция: Абонент с номером SIM:" + phone.SimNumber + " и IMEI " + phone.Imei +
+                                                                    " был зарегистрирован на станции 3G под номером " + Convert.ToString(Id));
+                    }
+                    else
+                    {
+                        myText.Add("Станция: Абонент с номером SIM: " + phone.SimNumber + " и IMEI " + phone.Imei +
+                                                                    " УЖЕ зарегистрирован на станции 3G. Повторная регистрация не требуется.");
+                    }
+                    Console.WriteLine(myText[0]);
+                }
             File.AppendAllLines("D:\\log.txt", myText);
         }
 
