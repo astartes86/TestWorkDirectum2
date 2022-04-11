@@ -58,7 +58,6 @@ namespace TestWorkDirectum.Phones
         {
             string s = "", symb = "0123456789";
             Random rnd = new Random();
-
             for (int i = 0; i < len; i++)
                 s += symb[rnd.Next(0, symb.Length)];
             return s;

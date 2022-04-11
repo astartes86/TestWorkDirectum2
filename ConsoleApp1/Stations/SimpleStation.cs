@@ -4,12 +4,20 @@ namespace TestWorkDirectum.Stations
 {
     internal class SimpleStation : IStation
     {
-        public SimpleStation()
+        public SimpleStation(int id)
         {
-            Console.WriteLine($"И создал Бог базовую станцию ");
+            Id = id;
+            Mess_st();
         }
-        //описываем зарег телефоны
 
+        public int Id { get; set; }
+
+        public virtual void Mess_st()
+        {
+            Console.WriteLine($"И была создана базовая станция");
+        }
+
+        //описываем зарег телефоны
         private List<IPhone> registeredPhones = new List<IPhone>();
         public List<IPhone> RegisteredPhones
         {
@@ -17,7 +25,6 @@ namespace TestWorkDirectum.Stations
             {
                 return registeredPhones;
             }
-
             set
             {
                 registeredPhones = value;

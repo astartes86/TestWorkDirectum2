@@ -12,9 +12,10 @@ public static class Program
         Console.WriteLine("Для останова программы - пробел");
         Console.WriteLine();
         var stations = new List<IStation>();
-        stations.Add(new SimpleStation());              //stations[0]
-        stations.Add(new Station3G(stations.Count));                  //stations[1]
-        //SimpleStation station1 = new ();  - пример одиночный
+        //stations.Add(new SimpleStation());                      //не смог сделать базу без параметра ибо выводится сообщение в теле конструктора
+        stations.Add(new SimpleStation(stations.Count));
+        stations.Add(new Station3G(stations.Count));
+        //SimpleStation station1 = new ();          - пример одиночный
         //внутри:
         //создали station1.RegisteredPhone          - метод: регистрирует телефоны - если уже регался, то в список RegisteredPhones не добавляем
         //создали station1.RegisteredPhones         - список зарег. простых телефонов
@@ -28,25 +29,23 @@ public static class Program
         //-------------------------------------------------------------------------------------------------
         //var phones = new List<IPhone>();
         var phoneslist = new PhoneList();
-        //phones.Add(new SimplePhone("123456789012345", "+75671119111"));     //phones[0]
+        //phones.Add(new SimplePhone("123456789012345", "+75671119111"));
         phoneslist.Add("123456789012345", "+75671119111", "");
-        phoneslist.Add("123456789055555", "+75672229222", "");         //phones[1]
-        phoneslist.Add("123456789066666", "+75673339333", "3g");         //phones[2]
-                                                                         //SimplePhone phone1 = new ("123412341234124", "+79828019521");         - пример одиночный
-                                                                         //Phone3G phone3 = new("332412347688664", "+79828019523");              - пример одиночный
-                                                                         //station1.RegisteredPhones.Add(phone1);    - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался, для этого и созда функцию ConnectToBase - пример одиночный
-                                                                         //public string Imei
-                                                                         //public string SimNumber
-                                                                         //public IStation BaseStation
-                                                                         //public List<Abonent> Abonents
-                                                                         //public void ConnectToBase(IStation station)   -переименовываем на Registration
-                                                                         //public void Call(string contactNumber)
-                                                                         //public void Call(Abonent abonent)
-                                                                         //-------------------------------------------------------------------------------------------------
-                                                                         //        phones[1].ConnectToBase(stations[1]);//при включении телефон послал запрос на регистрацию - пример одиночный
-                                                                         //        phones[1].Call("+79828019666");
-        Random x = new Random();//рандом для постепенного создания подключений телефонов
-        //Random y = new Random();//рандом для случайной станции
+        phoneslist.Add("123456789055555", "+75672229222", "");
+        phoneslist.Add("123456789066666", "+75673339333", "3g");
+        //SimplePhone phone1 = new ("123412341234124", "+79828019521");         - пример одиночный
+        //Phone3G phone3 = new("332412347688664", "+79828019523");              - пример одиночный
+        //station1.RegisteredPhones.Add(phone1);                                - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался,
+        //                                                                        для этого и создаем функцию ConnectToBase - пример одиночный
+        //public string Imei
+        //public string SimNumber
+        //public IStation BaseStation
+        //public List<Abonent> Abonents
+        //public void ConnectToBase(IStation station)                           -переименовываем на Registration
+        //public void Call(string contactNumber)
+        //public void Call(Abonent abonent)
+        //-------------------------------------------------------------------------------------------------
+        Random x = new Random();//рандом для создания подключений телефонов и прочего
         for (; ; )
         {
             int n = x.Next(100);
@@ -110,7 +109,7 @@ public static class Program
                 else
                 if (key == ConsoleKey.D)
                 {
-                    stations.Add(new SimpleStation());
+                    stations.Add(new SimpleStation(stations.Count));
                 }
                 else
                 if (key == ConsoleKey.T)                                    //исходящий звонок со случайного номера из имеющихся

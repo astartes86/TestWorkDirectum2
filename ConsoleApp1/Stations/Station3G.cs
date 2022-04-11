@@ -6,13 +6,14 @@ namespace TestWorkDirectum.Stations
 {
     internal class Station3G : SimpleStation    //наследуем от класса SimpleStation, который в свою очередь реализует интерфейс IStation
     {
-        public Station3G(int id) : base()       //наследуем все методы
+        public Station3G(int id) : base(id)       //наследуем все методы
         {
-            St_id = id;
-            Console.WriteLine($"А станция то 3G оказалась с номером: '{St_id}' ");
         }
 
-        private int St_id;
+        public override void Mess_st()
+        {
+            Console.WriteLine($"И была создана станция 3g с номером: '{Id}' ");
+        }
 
         public override void RegisterPhone(IPhone phone)
         {
@@ -25,7 +26,7 @@ namespace TestWorkDirectum.Stations
             {
                 RegisteredPhones.Add(phone);
                 Console.WriteLine($"Станция: Абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' был зарегистрирован на станции 3G.");
-                myText.Add("PHONE :: SIM: " + phone.SimNumber + " IMEI: " + phone.Imei + " Number of staion: " + Convert.ToString(St_id));
+                myText.Add("PHONE :: SIM: " + phone.SimNumber + " IMEI: " + phone.Imei + " Number of staion: " + Convert.ToString(Id));
                 //Log_write(phone.SimNumber, phone.Imei, St_id);
             }
             else
