@@ -15,7 +15,7 @@ namespace TestWorkDirectum.Phones
 
         public virtual void mess_ph()
         {
-            Console.WriteLine($"И был создан телефон с номером SIM: '{SimNumber}' и IMEI '{Imei}'");
+            Console.WriteLine($"И был создан телефон с номером SIM: '{SimNumber}' и IMEI '{Imei}'.");
         }
 
         //описываем имей 
@@ -27,7 +27,7 @@ namespace TestWorkDirectum.Phones
         //описываем станцию
         public IStation BaseStation { get; set; }
 
-        //описываем зарег телефоны
+        //описываем справочник
         List<Abonent> abonents = new();                                 //для коллекции всегда надо прописать аксессоры!
         public List<Abonent> Abonents //{ get; set; }
         {
@@ -56,18 +56,34 @@ namespace TestWorkDirectum.Phones
             var result = BaseStation?.ProcessCall(this); //зарегистрирован на станции? если базовая станция не создана - вызов не происходит
             if (result.Equals(true))
             {
-                Console.WriteLine($"Телефон '{this.SimNumber}': идет соединение с абонентом '{contactNumber}'");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Телефон '{this.SimNumber}': идет соединение с абонентом '{contactNumber}'.");
+                Console.ResetColor();
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Телефон '{this.SimNumber}': не удалось вызвать абонента '{contactNumber}' по причине отсутствия регистрации на станции.");
-                Console.WriteLine($"Либо ваша SIM заблокирована, либо сеть не найдена");
+                Console.ResetColor();
             }
         }
 
         public void Call(Abonent abonent)
         {
-            Call(abonent.PhoneNumber);
+            bool nocall = false;
+            foreach (var ab in Abonents)
+                if (ab.NameAbonent == abonent.NameAbonent)
+                {
+                    Call(ab.PhoneNumber);
+                    nocall = true;
+                    return;
+                }
+                else
+                {
+                    nocall = false;
+                }
+            if (!nocall)
+                Console.WriteLine($"Абонент '{abonent.NameAbonent}' не найден в справочнике контактов телефона с SIM номером '{this.SimNumber}'.");
         }
 
         //функция регистрирует телефоны

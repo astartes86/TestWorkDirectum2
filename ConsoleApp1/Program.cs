@@ -9,7 +9,7 @@ public static class Program
     public static void Main()
     {
         Console.WriteLine("Добро пожаловать в имитационную программу тестового задания 'Cтанции и телефоны'.");
-        Console.WriteLine("Для останова программы - пробел");
+        Console.WriteLine("Для останова программы - пробел.");
         Console.WriteLine();
         var stations = new List<IStation>();
         //stations.Add(new SimpleStation());                      //не смог сделать базу без параметра ибо выводится сообщение в теле конструктора
@@ -54,19 +54,19 @@ public static class Program
             if (n == 55)
             {
                 Console.WriteLine();
-                Console.WriteLine("Получем количественную информацию о системе - o");
-                Console.WriteLine("Введите для создания : базового телефона - a, 3g телефона - b, случайного телефона - e, 3g станции - c, базовой станции - d");
-                Console.WriteLine("Для регистрации телефонов нажмите r");
-                Console.WriteLine("Для разрегистрации случайного телефона на случайной станции нажмите k");
-                Console.WriteLine("Для вызова со случайного телефона из имеющихся нажмите t");
-                Console.WriteLine("Добавляем в справочник первого телефона три контакта - y");
-                Console.WriteLine("Звоним контакту первого телефона - u");
-                Console.WriteLine("Для выхода нажмите пробел");
+                Console.WriteLine("Получаем количественную информацию о системе - o.");
+                Console.WriteLine("Введите для создания : базового телефона - a, 3g телефона - b, случайного телефона - e, 3g станции - c, базовой станции - d.");
+                Console.WriteLine("Для регистрации телефонов нажмите r.");
+                Console.WriteLine("Для разрегистрации случайного телефона на случайной станции нажмите k.");
+                Console.WriteLine("Для вызова со случайного телефона из имеющихся нажмите t.");
+                Console.WriteLine("Добавляем в справочник первого телефона, зарегистрированного на станции, три контакта - y.");
+                Console.WriteLine("Для вызова по имени контакта c первого телефона, зарегистрированного на станции - u.");
+                Console.WriteLine("Для выхода - пробел.");
                 ConsoleKey key = Console.ReadKey().Key;
                 Console.WriteLine();
                 if (key == ConsoleKey.R)                                        //регистрируем:
                 {
-                    Console.WriteLine($"Регистрируем телефоны в сети на случайной станции. всего телефонов на данный момент - '{phoneslist.Count}' станций - '{stations.Count}'");
+                    Console.WriteLine($"Регистрируем телефоны в сети на случайной станции. всего телефонов на данный момент - '{phoneslist.Count}' станций - '{stations.Count}'.");
                     List<string> myText = new List<string>();
                     myText.Add(DateTime.Now + " New 3G phone registrations:");
                     File.AppendAllLines("D:\\log.txt", myText);                 //шапку в файл сразу пишем чтоб было более понятно
@@ -82,7 +82,7 @@ public static class Program
                     int st = x.Next(stations.Count);
                     int ph = x.Next(phoneslist.Count);
                     stations[st].RegisteredPhones.Remove(phoneslist[ph]);       //тупо удаляем из списка по айдишникам коллекций основной проги
-                    Console.WriteLine($"Станция: ID Абонента: '{ph}' был разрегистрирован на станции с ID ='{st}'");
+                    Console.WriteLine($"Станция: ID Абонента: '{ph}' был разрегистрирован на станции с ID ='{st}'.");
                     Console.WriteLine();
                 }
                 else
@@ -119,7 +119,7 @@ public static class Program
                     phoneslist.AnyPhoneAdd(x.Next(2));
                 }
                 else
-                if (key == ConsoleKey.T)                                    //исходящий звонок со случайного номера из имеющихся
+                if (key == ConsoleKey.T)                                    //исходящий звонок со случайного номера из созданных
                 {
                     int ph = x.Next(phoneslist.Count);
                     phoneslist[ph].Call("+79826661666");
@@ -131,19 +131,18 @@ public static class Program
                     phoneslist[0].CollectNumber(new Abonent("Ivan", "+79824449444"));
                     phoneslist[0].CollectNumber(new Abonent("Artur", "+79825559555"));
                 }
-                if (key == ConsoleKey.U)                                    //исходящий звонок со случайного номера из имеющихся но по имени в справочнике
+                if (key == ConsoleKey.U)                                    //исходящий звонок со первого номера по имени в справочнике
                 {
                     Console.Write("Введите имя: ");
                     string name = Console.ReadLine();
-                    phoneslist[0].Call(name);
+                    phoneslist[0].Call(new Abonent(name, ""));
                 }
                 else
                 if (key == ConsoleKey.O)                                    //итог текущий
                 {
-                    Console.WriteLine($"На данный момент имеем следующее. Всего телефонов на данный момент - '{phoneslist.Count}' станций - '{stations.Count}'");
+                    Console.WriteLine($"На данный момент имеем следующее(просто стало интересно, да и проверить легче). Всего телефонов на данный момент - '{phoneslist.Count}' станций - '{stations.Count}'");
                     int Cnt_p = 0, Cnt_s = 0;
-                    int[] Cnt_r = {};//new int[stations.Count];
-                    //int Cnt_r = 0;
+                    int[] Cnt_r = {};
                     foreach (var phone in phoneslist)
                         if (phone is Phone3G)
                         {
@@ -158,9 +157,7 @@ public static class Program
                             foreach (var R in st.RegisteredPhones)
                                 if (R is Phone3G)
                                 {
-                                    //Array.Resize(ref Cnt_r, Cnt_r.Length + 1);
                                     Cnt_r[Cnt_s-1]++;
-                                    //Cnt_r++;
                                 }
                         }
                     Console.WriteLine($"Станций 3g  - '{Cnt_s}'. Зарегистрированных на них 3g телефонов:");

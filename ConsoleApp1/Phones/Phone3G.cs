@@ -8,7 +8,7 @@
 
         public override void mess_ph()
         {
-            Console.WriteLine($"И был создан 3G телефон с номером SIM: '{SimNumber}' и IMEI '{Imei}'");
+            Console.WriteLine($"И был создан 3G телефон с номером SIM: '{SimNumber}' и IMEI '{Imei}'.");
         }
     }
 }

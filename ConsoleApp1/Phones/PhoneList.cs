@@ -23,7 +23,7 @@ namespace TestWorkDirectum.Phones
                 Console.WriteLine("IMEI не может быть пустым, должен содержать 15 цифр.\n" +
                                       "Sim не может быть пустым, номер должен начинаться с + и содержать 10 цифр.\n" +
                                       "Телефон не создан");
-                Console.WriteLine("Нажмите g для рандомной генерации номера");
+                Console.WriteLine("Нажмите g для рандомной генерации номера:");
                 ConsoleKey key = Console.ReadKey().Key;
                 Console.WriteLine();
                 if (key == ConsoleKey.G)                                    //go auto

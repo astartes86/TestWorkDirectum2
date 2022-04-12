@@ -14,7 +14,7 @@ namespace TestWorkDirectum.Stations
 
         public virtual void Mess_st()
         {
-            Console.WriteLine($"И была создана базовая станция");
+            Console.WriteLine($"И была создана базовая станция.");
         }
 
         //описываем зарег телефоны

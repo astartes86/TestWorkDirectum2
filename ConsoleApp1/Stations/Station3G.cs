@@ -13,7 +13,7 @@ namespace TestWorkDirectum.Stations
 
         public override void Mess_st()
         {
-            Console.WriteLine($"И была создана станция 3g с номером: '{Id}' ");
+            Console.WriteLine($"И была создана станция 3g с номером: '{Id}'.");
         }
 
         public override void RegisterPhone(IPhone phone)
