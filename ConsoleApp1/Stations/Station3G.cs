@@ -36,8 +36,8 @@ namespace TestWorkDirectum.Stations
                     }
                     else
                     {
-                        myText.Add("Станция: Абонент с номером SIM: " + phone.SimNumber + " и IMEI " + phone.Imei +
-                                                                    " УЖЕ зарегистрирован на станции 3G. Повторная регистрация не требуется.");
+                    myText.Add("Станция: Абонент с номером SIM: " + phone.SimNumber + " и IMEI " + phone.Imei +
+                                                                " УЖЕ зарегистрирован на станции 3G под номером " + Convert.ToString(Id) + " Повторная регистрация не требуется.");
                     }
                     Console.WriteLine(myText[0]);
                 }

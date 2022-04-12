@@ -31,10 +31,10 @@ public static class Program
         //var phones = new List<IPhone>();
         var phoneslist = new PhoneList();
         //phones.Add(new SimplePhone("123456789012345", "+75671119111"));
-        phoneslist.Add("123456789012345", "+75671119111", "");
-        phoneslist.Add("123456789055555", "+75672229222", "");
-        phoneslist.Add("123456789066666", "+75673339333", "3g");
-        phoneslist.Add("123456789077777", "+75678889888", "3g");
+        phoneslist.Add("123456789012345", "+75671119111", 0);                   // 0-базовая, 1-3g
+        phoneslist.Add("123456789055555", "+75672229222", 0);
+        phoneslist.Add("123456789066666", "+75673339333", 1);
+        phoneslist.Add("123456789077777", "+75678889888", 1);
         //SimplePhone phone1 = new ("123412341234124", "+79828019521");         - пример одиночный
         //Phone3G phone3 = new("332412347688664", "+79828019523");              - пример одиночный
         //station1.RegisteredPhones.Add(phone1);                                - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался,
@@ -55,7 +55,7 @@ public static class Program
             {
                 Console.WriteLine();
                 Console.WriteLine("Получем количественную информацию о системе - o");
-                Console.WriteLine("Введите для создания : 3g телефона - a, базового телефона - b, 3g станции - c, базовой станции - d");
+                Console.WriteLine("Введите для создания : базового телефона - a, 3g телефона - b, случайного телефона - e, 3g станции - c, базовой станции - d");
                 Console.WriteLine("Для регистрации телефонов нажмите r");
                 Console.WriteLine("Для разрегистрации случайного телефона на случайной станции нажмите k");
                 Console.WriteLine("Для вызова со случайного телефона из имеющихся нажмите t");
@@ -86,22 +86,22 @@ public static class Program
                     Console.WriteLine();
                 }
                 else
-                if (key == ConsoleKey.A)
-                {
-                    Console.Write("Введите номер SIM телефона 3g через +7: ");
-                    string sim = Console.ReadLine();
-                    Console.Write("Введите номер IMEI(15 цифр) телефона 3g: ");
-                    string imei = Console.ReadLine();
-                    phoneslist.Add(imei, sim, "3g");
-                }
-                else
-                if (key == ConsoleKey.B)
+                if (key == ConsoleKey.A)                                        //добавляем телефон
                 {
                     Console.Write("Введите номер SIM телефона через +7: ");
                     string sim = Console.ReadLine();
                     Console.Write("Введите номер IMEI(15 цифр): ");
                     string imei = Console.ReadLine();
-                    phoneslist.Add(imei, sim, "");
+                    phoneslist.Add(imei, sim, 0);
+                }
+                else
+                if (key == ConsoleKey.B)
+                {
+                    Console.Write("Введите номер SIM телефона 3g через +7: ");
+                    string sim = Console.ReadLine();
+                    Console.Write("Введите номер IMEI(15 цифр) телефона 3g: ");
+                    string imei = Console.ReadLine();
+                    phoneslist.Add(imei, sim, 1);
                 }
                 else
                 if (key == ConsoleKey.C)
@@ -112,6 +112,11 @@ public static class Program
                 if (key == ConsoleKey.D)
                 {
                     stations.Add(new SimpleStation(stations.Count));
+                }
+                else
+                if (key == ConsoleKey.E)                                    //быстро генерим телефон
+                {
+                    phoneslist.AnyPhoneAdd(x.Next(2));
                 }
                 else
                 if (key == ConsoleKey.T)                                    //исходящий звонок со случайного номера из имеющихся

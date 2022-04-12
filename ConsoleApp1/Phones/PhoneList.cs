@@ -9,11 +9,11 @@ namespace TestWorkDirectum.Phones
 {
     internal class PhoneList : List<IPhone>
     {
-        public void Add(string codeImei, string sim, string Flag3g)        //переопределить Add не получилось потому создали свой    
+        public void Add(string codeImei, string sim, int Flag3g)        //переопределить Add не получилось потому создали свой    
         {
             if (codeImei != "" && codeImei.Length == 15 && IsLetterContains(codeImei) && sim != "" && sim.Length == 12 && sim[0] == '+' && IsLetterContainsFrom(sim))
             {
-                if (Flag3g != "3g")
+                if (Flag3g == 0)
                     this.Add(new SimplePhone(codeImei, sim));
                 else
                     this.Add(new Phone3G(codeImei, sim));
@@ -28,14 +28,19 @@ namespace TestWorkDirectum.Phones
                 Console.WriteLine();
                 if (key == ConsoleKey.G)                                    //go auto
                 {
-                    codeImei = RndStr(15);
-                    sim = '+' + RndStr(11);
-                    if (Flag3g != "3g")
-                        this.Add(new SimplePhone(codeImei, sim));
-                    else
-                        this.Add(new Phone3G(codeImei, sim));
+                    AnyPhoneAdd(Flag3g);
                 }
             }
+        }
+
+        public void AnyPhoneAdd(int Flag3g)
+        {
+            string codeImei = RndStr(15);
+            string sim = '+' + RndStr(11);
+            if (Flag3g == 0)
+                this.Add(new SimplePhone(codeImei, sim));
+            else
+                this.Add(new Phone3G(codeImei, sim));
         }
 
         private bool IsLetterContains(string input)
