@@ -35,12 +35,12 @@ namespace TestWorkDirectum.Stations
         public virtual void RegisterPhone(IPhone phone)
         {
             bool same = false;
-            foreach (var ph in RegisteredPhones) //проверили имеющийся список на повторения
+            foreach (var ph in RegisteredPhones)        //проверили имеющийся список на повторения
                 if (ph == phone) same = true;
             if (!same)
             {
-                RegisteredPhones.Add(phone);
-                Console.WriteLine($"Станция: Абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' был зарегистрирован на станции.");
+                RegisteredPhones.Add(phone);            //по хорошему надо проверять на 3g для более корректного сообщения, но интуитивное чувство бесмысленности выполняемых действий говорит не надо
+                Console.WriteLine($"Станция: Абонент с номером: '{phone.SimNumber}' и IMEI '{phone.Imei}' был зарегистрирован на одной из базовых станций.");
             }
             else
             {
