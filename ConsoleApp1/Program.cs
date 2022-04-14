@@ -2,8 +2,10 @@
 using TestWorkDirectum.Stations;
 using TestWorkDirectum.Interfaces;
 using TestWorkDirectum.Structs;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
-namespace TestWorkDirectum;
 public static class Program
 {
     public static void Main()
@@ -13,9 +15,9 @@ public static class Program
         Console.WriteLine();
         List<IStation> stations = new List<IStation>();
         //stations.Add(new SimpleStation());                      //не смог сделать базу без параметра ибо выводится сообщение в теле конструктора
-        //        stations.Add(new SimpleStation(stations.Count));
-        //        stations.Add(new Station3G(stations.Count));
-        //        stations.Add(new Station3G(stations.Count));
+        stations.Add(new SimpleStation(stations.Count));
+        stations.Add(new Station3G(stations.Count));
+        stations.Add(new Station3G(stations.Count));
         //SimpleStation station1 = new ();          - пример одиночный
         //внутри:
         //создали station1.RegisteredPhone          - метод: регистрирует телефоны - если уже регался, то в список RegisteredPhones не добавляем
@@ -31,10 +33,10 @@ public static class Program
         //var phones = new List<IPhone>();
         PhoneList phoneslist = new PhoneList();
         //phones.Add(new SimplePhone("123456789012345", "+75671119111"));
-//        phoneslist.Add("123456789012345", "+75671119111", 0);                   // 0-базовая, 1-3g
-//        phoneslist.Add("123456789055555", "+75672229222", 0);
-//        phoneslist.Add("123456789066666", "+75673339333", 1);
-//        phoneslist.Add("123456789077777", "+75678889888", 1);
+        phoneslist.Add("123456789012345", "+75671119111", 0);                   // 0-базовая, 1-3g
+        phoneslist.Add("123456789055555", "+75672229222", 0);
+        phoneslist.Add("123456789066666", "+75673339333", 1);
+        phoneslist.Add("123456789077777", "+75678889888", 1);
         //SimplePhone phone1 = new ("123412341234124", "+79828019521");         - пример одиночный
         //Phone3G phone3 = new("332412347688664", "+79828019523");              - пример одиночный
         //station1.RegisteredPhones.Add(phone1);                                - станция зарегала сама, а надо чтоб телефон сам при объявлении зарегался,

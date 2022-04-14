@@ -1,4 +1,6 @@
-﻿namespace TestWorkDirectum.Phones
+﻿using System;
+
+namespace TestWorkDirectum.Phones
 {
     internal class Phone3G : SimplePhone //наследник : предок
     {

@@ -9,10 +9,10 @@ namespace TestWorkDirectum.Interfaces
 {
     internal interface IStation
     {
-        public List<IPhone> RegisteredPhones { get; }
+         List<IPhone> RegisteredPhones { get; }
 
-        public void RegisterPhone(IPhone phone);
+         void RegisterPhone(IPhone phone);
 
-        public bool ProcessCall(IPhone phone);
+         bool ProcessCall(IPhone phone);
     }
 }

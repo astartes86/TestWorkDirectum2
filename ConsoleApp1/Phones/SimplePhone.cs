@@ -1,5 +1,7 @@
 ﻿using TestWorkDirectum.Interfaces;
 using TestWorkDirectum.Structs;
+using System.Collections.Generic;
+using System;
 
 namespace TestWorkDirectum.Phones
 {
@@ -28,7 +30,7 @@ namespace TestWorkDirectum.Phones
         public IStation BaseStation { get; set; }
 
         //описываем справочник
-        List<Abonent> abonents = new();                                 //для коллекции всегда надо прописать аксессоры!
+        List<Abonent> abonents = new List<Abonent>();                                 //для коллекции всегда надо прописать аксессоры!
         public List<Abonent> Abonents //{ get; set; }
         {
             get

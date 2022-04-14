@@ -10,20 +10,20 @@ namespace TestWorkDirectum.Interfaces
 {
     internal interface IPhone
     {
-        public string Imei { get; set; }
+         string Imei { get; set; }
 
-        public string SimNumber { get; set; }
+         string SimNumber { get; set; }
 
-        public void Registration(IStation station);
+         void Registration(IStation station);
 
-        public void Call(string contactNumber);
+         void Call(string contactNumber);
 
-        public void Call(Abonent abonent);
+         void Call(Abonent abonent);
 
-        protected List<Abonent> Abonents { get; }
+         List<Abonent> Abonents { get; }
 
-        protected IStation BaseStation { get; }
+         IStation BaseStation { get; }
 
-        public void CollectNumber(Abonent abonent);
+         void CollectNumber(Abonent abonent);
     }
 }
